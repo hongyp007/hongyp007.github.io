@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YoungPyo Hong — Gamma-Ray Bursts &amp; Time-Domain Astronomy</title>
+<meta name="description" content="YoungPyo Hong is an integrated MS-PhD student in astronomy at Seoul National University studying gamma-ray burst afterglows and relativistic jet structure with the 7-Dimensional Telescope.">
+<meta name="author" content="YoungPyo Hong">
+
+<meta property="og:title" content="YoungPyo Hong — Gamma-Ray Bursts & Time-Domain Astronomy">
+<meta property="og:description" content="Integrated MS-PhD student at Seoul National University studying gamma-ray burst afterglows and relativistic jet structure with the 7-Dimensional Telescope.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hongyp007.github.io/">
+<meta property="og:image" content="https://hongyp007.github.io/assets/profile.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9733;</text></svg>">
+
+<!--
+  Decide before first paint whether the opening expansion runs, so the hero
+  never flashes in and then re-animates. Runs once per browser session, and
+  not at all if the visitor prefers reduced motion or if this script fails —
+  in which case the page simply renders normally.
+-->
+<script>
+(function () {
+  try {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false;
+    try { seen = !!sessionStorage.getItem('introSeen'); } catch (e) {}
+    if (!reduce && !seen) document.documentElement.classList.add('intro');
+  } catch (e) {}
+})();
+</script>
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#14171b; --ink-soft:#4b525a; --ink-faint:#79808a;
+  --rule:#e5e8ec; --bg:#fff; --bg-soft:#f6f8fb;
+  --accent:#2563a8; --accent-soft:#e9f1f9;
+  --night-0:#03060f; --night-1:#070d1e; --night-2:#0f1f3d; --night-3:#1b3a68;
+  --glow:#7cc0ff; --glow-2:#b98cff;
+  --maxw:960px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);overflow-x:hidden;
+  font:16.5px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans KR",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress{
+  position:fixed;top:0;left:0;height:2.5px;width:0%;z-index:100;
+  background:linear-gradient(90deg,var(--glow),var(--glow-2));
+  box-shadow:0 0 10px rgba(124,192,255,.8);transition:width .1s linear;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  overflow:hidden;color:#fff;background:var(--night-0);
+  padding:96px 0 120px;
+}
+#sky{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+
+/* nebula wash painted in CSS so it survives even if canvas fails */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 76% 6%,  rgba(60,120,205,.34), transparent 60%),
+    radial-gradient(760px 460px at 14% 26%, rgba(126,72,190,.24), transparent 62%),
+    radial-gradient(620px 380px at 52% 96%, rgba(28,90,160,.30), transparent 64%);
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:180px;z-index:2;
+  background:linear-gradient(to top,#fff 0%,rgba(255,255,255,.55) 34%,transparent 100%);
+  pointer-events:none;
+}
+.hero .wrap{position:relative;z-index:3}
+
+.hero-grid{display:flex;gap:44px;align-items:center;flex-wrap:wrap}
+
+.avatar-ring{position:relative;flex-shrink:0;width:170px;height:170px}
+.avatar-ring::before{
+  content:"";position:absolute;inset:-14px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--glow),var(--glow-2),#5ce1c6,var(--glow));
+  filter:blur(13px);opacity:.42;animation:spin 14s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.avatar,.avatar-fb{
+  position:relative;width:170px;height:170px;border-radius:50%;object-fit:cover;
+  border:3px solid rgba(255,255,255,.35);
+  box-shadow:0 18px 50px rgba(0,0,0,.55);background:#0b1428;
+}
+.avatar-fb{
+  display:none;align-items:center;justify-content:center;
+  font-size:52px;font-weight:600;letter-spacing:2px;color:#cfe4ff;
+  background:linear-gradient(150deg,#16294a,#274a7d);
+}
+
+.hero-text{flex:1;min-width:300px}
+.eyebrow{
+  font-size:12.5px;font-weight:700;letter-spacing:2.6px;text-transform:uppercase;
+  color:var(--glow);margin:0 0 14px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--glow);opacity:.7}
+.hero h1{
+  font-size:clamp(36px,6.2vw,60px);line-height:1.02;margin:0 0 8px;
+  letter-spacing:-1.6px;font-weight:700;
+}
+.hero h1 .full{
+  display:block;font-size:.42em;letter-spacing:-.2px;font-weight:400;
+  color:rgba(255,255,255,.5);margin-top:10px;
+}
+.tagline{
+  font-size:clamp(16.5px,2vw,19.5px);line-height:1.58;color:rgba(255,255,255,.9);
+  margin:20px 0 0;max-width:34em;
+}
+.tagline b{color:#fff;font-weight:650}
+.tagline .hl{color:var(--glow);font-weight:650}
+a.hl{
+  text-decoration:none;border-bottom:1px solid rgba(124,192,255,.42);
+  transition:border-color .2s,color .2s;
+}
+a.hl:hover{color:#b6dcff;border-bottom-color:#b6dcff;text-decoration:none}
+
+.affil{
+  margin:22px 0 0;font-size:14.5px;color:rgba(255,255,255,.6);
+  padding-top:20px;border-top:1px solid rgba(255,255,255,.14);
+}
+
+.btns{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.btns a{
+  position:relative;overflow:hidden;
+  display:inline-block;padding:10px 19px;font-size:14.5px;font-weight:600;border-radius:8px;
+  color:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.24);
+  background:rgba(255,255,255,.06);backdrop-filter:blur(5px);
+  transition:transform .22s var(--ease),background .22s,border-color .22s;
+}
+.btns a::after{
+  content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transition:left .55s var(--ease);
+}
+.btns a:hover::after{left:130%}
+.btns a:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5);color:#fff;text-decoration:none;transform:translateY(-2px)}
+.btns a.cta{background:var(--glow);border-color:var(--glow);color:#06213d}
+.btns a.cta:hover{background:#a5d5ff;border-color:#a5d5ff}
+
+.scroll-cue{
+  position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:3;
+  color:rgba(255,255,255,.5);font-size:11.5px;letter-spacing:2.2px;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+}
+.scroll-cue span{display:block;width:1px;height:38px;background:linear-gradient(to bottom,var(--glow),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%,100%{opacity:.25;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ============================================================
+   OPENING EXPANSION
+   The starfield begins collapsed at a point and expands outward;
+   the hero content rises through it. Purely additive — without the
+   .intro class (no JS, reduced motion, or a repeat visit in the same
+   session) everything below simply never applies.
+   ============================================================ */
+.intro .hero-grid{animation:heroIn 1s var(--ease) .5s both}
+.intro .scroll-cue{animation:heroIn .8s var(--ease) 1.25s both}
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(20px) scale(.985)}
+  to{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .intro .hero-grid,.intro .scroll-cue{animation:none}
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{position:sticky;top:0;z-index:70;background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;gap:6px;align-items:center;height:58px;overflow-x:auto;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav .brand{font-weight:700;color:var(--ink);margin-right:auto;font-size:15.5px;letter-spacing:-.2px}
+nav a:not(.brand){
+  position:relative;color:var(--ink-soft);font-size:14.5px;font-weight:500;
+  white-space:nowrap;padding:7px 12px;border-radius:7px;transition:.2s;
+}
+nav a:not(.brand):hover{color:var(--accent);background:var(--accent-soft);text-decoration:none}
+nav a.active{color:var(--accent);background:var(--accent-soft);font-weight:650}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section{padding:74px 0;border-bottom:1px solid var(--rule);position:relative}
+section:last-of-type{border-bottom:0}
+.h{margin:0 0 34px}
+.h .k{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px}
+.h h2{font-size:29px;letter-spacing:-.7px;margin:0;font-weight:700}
+
+/* ---- interests ---- */
+.interests{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.int{
+  position:relative;overflow:hidden;
+  padding:26px 23px;border:1px solid var(--rule);border-radius:13px;background:var(--bg);
+  transition:transform .28s var(--ease),box-shadow .28s,border-color .28s;
+}
+.int::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(37,99,168,.09),transparent 62%);
+}
+.int:hover::before{opacity:1}
+.int:hover{border-color:#bcd3e8;box-shadow:0 14px 36px rgba(20,50,90,.11);transform:translateY(-4px)}
+.int .ic{
+  width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;margin-bottom:15px;transition:.3s;
+}
+.int:hover .ic{background:var(--accent);color:#fff;transform:scale(1.06) rotate(-4deg)}
+.int h3{font-size:16.5px;margin:0 0 7px;font-weight:650}
+.int p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin:0}
+
+/* ---- project cards ---- */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card{
+  position:relative;border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:var(--bg);
+  display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s,border-color .3s;
+  transform-style:preserve-3d;
+}
+.card::before{
+  content:"";position:absolute;inset:0;z-index:4;opacity:0;transition:opacity .3s;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(37,99,168,.10),transparent 60%);
+}
+.card:hover::before{opacity:1}
+.card:hover{border-color:#bcd3e8;box-shadow:0 22px 52px rgba(20,50,90,.15)}
+
+.thumb{display:block;height:196px;background:var(--bg-soft);border-bottom:1px solid var(--rule);
+       padding:13px;position:relative;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .45s var(--ease)}
+/* photographs and illustrations fill the frame; data figures stay letterboxed */
+.thumb.photo{padding:0;background:var(--night-1)}
+.thumb.photo img{object-fit:cover}
+/* a lone trailing card stretches rather than leaving a gap */
+.cards .card:last-child:nth-child(odd){grid-column:1 / -1}
+.card:hover .thumb img{transform:scale(1.045)}
+.thumb.void{
+  background:linear-gradient(150deg,var(--night-1),var(--night-3));border-bottom:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.thumb.void img{display:none}
+.thumb.void svg{opacity:.62;transition:.45s var(--ease)}
+.card:hover .thumb.void svg{opacity:.95;transform:scale(1.08) rotate(6deg)}
+.thumb.void::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120px circle at 78% 22%,rgba(124,192,255,.22),transparent 65%);
+}
+
+.card-body{padding:21px 23px 23px;flex:1;display:flex;flex-direction:column;position:relative;z-index:2}
+.card h3{font-size:17.5px;line-height:1.35;margin:0 0 10px;font-weight:650}
+.card p{font-size:14.8px;line-height:1.62;color:var(--ink-soft);margin:0 0 15px}
+.card .foot{margin-top:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+.tag{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+  padding:3.5px 10px;border-radius:20px;background:var(--bg-soft);color:var(--ink-faint);border:1px solid var(--rule);
+}
+.tag.pub{background:#e4f5ea;color:#136c3d;border-color:#c4e8d2}
+.tag.prep{background:#fff3dc;color:#8a5800;border-color:#f5e0b8}
+.tag.live{background:var(--accent-soft);color:var(--accent);border-color:#cfe2f3}
+a.tag.link{color:var(--accent);border-color:#cfe2f3;background:var(--bg);transition:.2s}
+a.tag.link:hover{background:var(--accent);border-color:var(--accent);color:#fff;text-decoration:none}
+
+/* ---- lists ---- */
+ol.pubs,ul.plain{margin:0;padding:0;list-style:none}
+ol.pubs li{font-size:15.3px;color:var(--ink-soft);padding-bottom:17px;margin-bottom:17px;border-bottom:1px dotted var(--rule)}
+ol.pubs li:last-child,ul.plain li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.title{color:var(--ink);font-weight:640;display:block;margin-bottom:4px}
+.me{color:var(--accent);font-weight:700}
+.venue{font-style:italic}
+.pub-links{margin-top:8px;font-size:13.4px}
+.sub-h{font-size:11.5px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;
+       color:var(--ink-faint);margin:30px 0 15px}
+.pub-links a{margin-right:13px;font-weight:600;border-bottom:1px solid transparent;transition:.2s}
+.pub-links a:hover{border-bottom-color:var(--accent);text-decoration:none}
+
+ul.plain li{font-size:15.3px;color:var(--ink-soft);padding-left:19px;position:relative;margin-bottom:16px;transition:.25s}
+ul.plain li::before{
+  content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);opacity:.35;transition:.25s;
+}
+ul.plain li:hover::before{opacity:1;box-shadow:0 0 0 4px var(--accent-soft)}
+
+.row{display:flex;gap:24px;margin-bottom:20px;align-items:baseline}
+.row:last-child{margin-bottom:0}
+.row .when{flex:0 0 138px;font-size:13.4px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.row .what{flex:1;font-size:15.3px;color:var(--ink-soft)}
+.row .what strong{color:var(--ink);font-weight:640}
+.row .what .sub{display:block;font-size:14.2px;color:var(--ink-faint);margin-top:3px}
+
+/* ---- accordion (schools & workshops) ---- */
+.acc{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:11px;background:var(--bg);transition:.25s}
+.acc.open{border-color:#bcd3e8;box-shadow:0 10px 30px rgba(20,50,90,.09)}
+.acc-btn{
+  width:100%;text-align:left;background:none;border:0;cursor:pointer;font:inherit;color:var(--ink);
+  padding:18px 21px;display:flex;align-items:center;gap:13px;transition:background .2s;
+}
+.acc-btn:hover{background:var(--bg-soft)}
+.acc-btn .nm{font-weight:650;font-size:16px;flex:1}
+.acc-btn .ct{font-size:12.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.acc-btn .cv{
+  width:22px;height:22px;flex-shrink:0;color:var(--accent);
+  transition:transform .35s var(--ease);
+}
+.acc.open .acc-btn .cv{transform:rotate(180deg)}
+.acc-panel{max-height:0;overflow:hidden;transition:max-height .42s var(--ease)}
+.acc-inner{padding:0 21px 20px 21px}
+.acc-inner .row{margin-bottom:15px}
+.acc-inner .row .when{flex:0 0 104px}
+
+/* ---- prose ---- */
+p.prose{font-size:16.5px;line-height:1.72;color:var(--ink-soft);margin:0 0 16px;max-width:64ch}
+p.prose:last-child{margin-bottom:0}
+p.prose strong{color:var(--ink);font-weight:640}
+
+/* ============================================================
+   TAB PANELS
+   Progressive enhancement: with JS off, every section is visible
+   and the nav degrades to ordinary in-page anchors.
+   ============================================================ */
+body.tabs section[data-tab]{display:none}
+body.tabs section[data-tab].on{display:block}
+/* the last visible section in a tab shouldn't draw a trailing rule */
+body.tabs section[data-tab].last-on{border-bottom:0}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+body.tabs section[data-tab].on{animation:panelIn .42s var(--ease) both}
+body.tabs section[data-tab].on:nth-of-type(even){animation-delay:.06s}
+@media (prefers-reduced-motion:reduce){
+  body.tabs section[data-tab].on{animation:none}
+}
+
+/* ---- facilities ---- */
+.fac{border:1px solid var(--rule);border-radius:13px;padding:24px 25px;margin-bottom:18px;
+     background:var(--bg);transition:border-color .25s,box-shadow .25s}
+.fac:last-child{margin-bottom:0}
+.fac:hover{border-color:#bcd3e8;box-shadow:0 12px 32px rgba(20,50,90,.09)}
+.fac-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.fac-top h3{font-size:19px;margin:0;font-weight:680;letter-spacing:-.3px}
+.fac-top .where{font-size:13.5px;color:var(--ink-faint)}
+.fac > p{font-size:15.2px;line-height:1.62;color:var(--ink-soft);margin:0 0 16px}
+.fac-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:0 26px;
+           border-top:1px solid var(--rule);padding-top:14px}
+.fac-specs div{display:flex;gap:11px;font-size:13.8px;color:var(--ink-soft);
+               padding:5px 0;border-bottom:1px dotted var(--rule)}
+.fac-specs span{flex:0 0 96px;color:var(--ink-faint);font-size:11px;font-weight:700;
+                letter-spacing:.9px;text-transform:uppercase;padding-top:3px}
+.mypart{margin-top:16px;padding:13px 16px;border-radius:9px;background:var(--accent-soft);
+        font-size:14.4px;line-height:1.6;color:#1c4c7d}
+.mypart b{font-weight:700}
+@media (max-width:760px){ .fac-specs{grid-template-columns:1fr} }
+
+a.tag.link-tag{transition:.2s}
+a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-decoration:none}
+
+.fac-photo{display:block;border-radius:11px;overflow:hidden;margin:0 0 18px;
+           border:1px solid var(--rule);background:var(--night-1);cursor:zoom-in}
+/* the crop is baked into the files, so framing no longer depends on viewport width */
+.fac-photo img{width:100%;height:auto;display:block;transition:transform .5s var(--ease)}
+.fac-photo:hover img{transform:scale(1.035)}
+.fac-photo.shot-rasa{max-width:440px}
+
+/* ---- project detail modal ---- */
+.card{cursor:pointer}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.card .detail{display:none}
+
+#detail{
+  position:fixed;inset:0;z-index:210;display:none;align-items:center;justify-content:center;
+  background:rgba(4,8,18,.72);backdrop-filter:blur(7px);padding:32px;
+}
+#detail.on{display:flex}
+.detail-panel{
+  position:relative;display:grid;grid-template-columns:1.15fr .85fr;
+  width:min(1060px,100%);max-height:min(680px,90vh);
+  background:var(--bg);border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 110px rgba(0,0,0,.5);
+  animation:panelPop .3s var(--ease) both;
+}
+@keyframes panelPop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){ .detail-panel{animation:none} }
+
+.detail-x{
+  position:absolute;top:12px;right:14px;z-index:4;width:34px;height:34px;border:0;border-radius:50%;
+  background:rgba(255,255,255,.9);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.detail-x:hover{background:#fff;transform:rotate(90deg)}
+
+.detail-shots{position:relative;background:var(--night-1);display:flex;flex-direction:column}
+.shot-stage{flex:1;position:relative;overflow:hidden;min-height:260px}
+.shot-stage img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:20px;
+  opacity:0;transition:opacity .3s var(--ease);
+}
+.shot-stage img.on{opacity:1}
+.shot-cap{
+  padding:0 20px 16px;font-size:12.8px;line-height:1.5;color:rgba(255,255,255,.66);
+  min-height:20px;
+}
+.shot-nav{
+  position:absolute;top:calc(50% - 22px);z-index:3;width:38px;height:44px;border:0;cursor:pointer;
+  background:rgba(0,0,0,.4);color:#fff;font-size:24px;line-height:1;border-radius:7px;
+  opacity:0;transition:opacity .22s,background .22s;
+}
+.detail-shots:hover .shot-nav{opacity:1}
+.shot-nav:hover{background:rgba(0,0,0,.72)}
+.shot-nav.prev{left:12px}
+.shot-nav.next{right:12px}
+.shot-nav[hidden]{display:none}
+.shot-dots{
+  position:absolute;bottom:44px;left:0;right:0;display:flex;gap:7px;justify-content:center;z-index:3;
+}
+.shot-dots button{
+  width:7px;height:7px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.34);transition:.2s;
+}
+.shot-dots button.on{background:#fff;transform:scale(1.35)}
+
+.detail-text{padding:34px 34px 30px;overflow-y:auto}
+.detail-text h3{font-size:23px;line-height:1.25;margin:0 0 16px;font-weight:690;letter-spacing:-.4px}
+.detail-content p{font-size:15.2px;line-height:1.68;color:var(--ink-soft);margin:0 0 14px}
+.detail-content p:last-child{margin-bottom:0}
+.detail-content .detail-note{
+  font-size:13.8px;color:var(--ink-faint);border-left:2px solid var(--rule);
+  padding-left:12px;margin-top:16px;
+}
+.detail-foot{margin-top:22px;padding-top:16px;border-top:1px solid var(--rule);
+             display:flex;gap:8px;flex-wrap:wrap}
+
+@media (max-width:880px){
+  #detail{padding:16px}
+  .detail-panel{grid-template-columns:1fr;max-height:92vh}
+  .shot-stage{min-height:220px}
+  .detail-text{padding:24px}
+  .shot-nav{opacity:1}
+}
+
+.talk-note{display:block;margin-top:7px;font-size:14.2px;line-height:1.6;color:var(--ink-faint)}
+.poster-link{cursor:zoom-in}
+
+/* ---- contact ---- */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.contact-card{border:1px solid var(--rule);border-radius:13px;padding:24px 23px;background:var(--bg);
+              transition:border-color .25s,box-shadow .25s,transform .25s var(--ease)}
+.contact-card:hover{border-color:#bcd3e8;box-shadow:0 12px 32px rgba(20,50,90,.09);transform:translateY(-3px)}
+.contact-lines{font-size:15.2px;line-height:1.75;color:var(--ink-soft);margin:0}
+.contact-note{font-size:13.8px;line-height:1.6;color:var(--ink-faint);margin:12px 0 0;
+              padding-top:12px;border-top:1px dotted var(--rule)}
+@media (max-width:820px){ .contact-grid{grid-template-columns:1fr} }
+
+/* ---- timeline photo inset ---- */
+.tl-wrap{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start;margin-top:28px}
+.tl-wrap .tl{margin-top:4px}
+.tl-photo{margin:0}
+.tl-photo a{display:block;border-radius:10px;overflow:hidden;border:1px solid var(--rule);
+            background:var(--bg-soft);cursor:zoom-in}
+.tl-photo img{width:100%;display:block;transition:transform .5s var(--ease)}
+.tl-photo a:hover img{transform:scale(1.04)}
+.tl-photo figcaption{font-size:12.6px;line-height:1.5;color:var(--ink-faint);margin-top:9px}
+@media (max-width:700px){
+  .tl-wrap{grid-template-columns:1fr;gap:20px}
+  .tl-photo{max-width:230px}
+}
+
+/* ---- timeline ---- */
+.tl{position:relative;margin:28px 0 0;padding-left:26px}
+.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;
+            background:linear-gradient(to bottom,var(--accent),#cfe2f3)}
+.tl-item{position:relative;padding-bottom:20px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:-26px;top:5px;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent);box-shadow:0 0 0 3px var(--bg);
+  transition:transform .25s var(--ease),background .25s;
+}
+.tl-item:hover::before{transform:scale(1.25);background:var(--accent)}
+.tl-when{font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+         color:var(--ink-faint)}
+.tl-what{font-size:15.3px;line-height:1.6;color:var(--ink-soft);margin-top:2px}
+.tl-what b{color:var(--ink);font-weight:640}
+
+/* ---- pull quote ---- */
+.pq{margin:28px 0 0;padding:19px 24px;border-left:3px solid var(--accent);
+    background:var(--bg-soft);border-radius:0 10px 10px 0;
+    font-size:16.5px;line-height:1.62;color:var(--ink)}
+
+/* ---- topic cards: boxed, with the image side alternating ---- */
+.alts{display:flex;flex-direction:column;gap:22px}
+.alt{
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;
+  border:1px solid var(--rule);border-radius:14px;padding:24px;background:var(--bg);
+  transition:border-color .25s,box-shadow .25s,transform .25s var(--ease);
+}
+.alt:hover{border-color:#bcd3e8;box-shadow:0 14px 34px rgba(20,50,90,.10);transform:translateY(-2px)}
+.alts > .alt:nth-child(even) .alt-media{order:2}
+.alt.no-media{grid-template-columns:1fr}      /* image missing → text takes the row */
+.alt.no-media .alt-media{display:none}
+
+.alt-media{display:block}
+.alt-media > a{position:relative;display:block;border-radius:12px;overflow:hidden;
+               border:1px solid var(--rule);background:var(--night-1);cursor:zoom-in}
+.alt-media img{width:100%;display:block;transition:transform .55s var(--ease)}
+.alt-media > a:hover img{transform:scale(1.045)}
+/* a topic holding several photos shows them as a grid of the same footprint */
+.alt-media.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.alt-media.grid > a{aspect-ratio:1/1}
+.alt-media.grid img{height:100%;object-fit:cover}
+.alt-media.grid > a:only-child{grid-column:1 / -1;aspect-ratio:auto}
+.alt-media > a[hidden]{display:none}
+
+/* caption sits on the photo, like the old gallery */
+.alt-media .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;
+  font-size:12.4px;line-height:1.35;color:#fff;font-weight:500;
+  background:linear-gradient(to top,rgba(0,0,0,.84),rgba(0,0,0,.35) 45%,transparent);
+  opacity:0;transition:opacity .28s var(--ease);pointer-events:none;
+}
+.alt-media > a:hover .cap{opacity:1}
+/* no hover on touch devices — show them by default there */
+@media (hover:none){ .alt-media .cap{opacity:1} }
+
+.alt-body h3{font-size:20px;margin:0 0 4px;font-weight:680;letter-spacing:-.3px}
+.alt-body .kicker{font-size:11.5px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase;
+                  color:var(--accent);margin:0 0 9px}
+.alt-body p{font-size:15.3px;line-height:1.66;color:var(--ink-soft);margin:0 0 12px}
+.alt-body p:last-child{margin-bottom:0}
+
+.specs{margin-top:18px;border-top:1px solid var(--rule);padding-top:14px}
+.specs div{display:flex;gap:12px;font-size:13.6px;color:var(--ink-soft);
+           padding:4px 0;border-bottom:1px dotted var(--rule)}
+.specs div:last-child{border-bottom:0}
+.specs span{flex:0 0 70px;color:var(--ink-faint);font-size:11px;font-weight:700;
+            letter-spacing:.9px;text-transform:uppercase;padding-top:3px}
+
+
+@media (max-width:820px){
+  .alt,.alts > .alt:nth-child(even) .alt-media{grid-template-columns:1fr;order:0}
+  .alts{gap:18px}
+  .alt{padding:20px}
+}
+
+
+#lightbox{
+  position:fixed;inset:0;z-index:200;background:rgba(3,6,15,.95);
+  display:none;align-items:center;justify-content:center;padding:34px;cursor:zoom-out;
+  backdrop-filter:blur(6px);
+}
+#lightbox.on{display:flex}
+#lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 30px 90px rgba(0,0,0,.7)}
+#lightbox .cap{
+  position:absolute;bottom:20px;left:0;right:0;text-align:center;
+  color:rgba(255,255,255,.72);font-size:13.5px;padding:0 30px;
+}
+#lightbox .x{position:absolute;top:18px;right:24px;color:rgba(255,255,255,.7);
+             font-size:30px;line-height:1;cursor:pointer}
+
+
+/* ============================================================
+   FOOTER (space band)
+   ============================================================ */
+footer{position:relative;overflow:hidden;background:var(--night-0);color:rgba(255,255,255,.6);padding:56px 0;font-size:14px}
+#skyfoot{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+footer::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(700px 300px at 80% 110%,rgba(60,120,205,.30),transparent 62%),
+             radial-gradient(520px 260px at 12% -10%,rgba(126,72,190,.20),transparent 64%);
+}
+footer .wrap{position:relative;z-index:2;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer a{color:var(--glow)}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .avatar-ring::before,.scroll-cue span{animation:none}
+  html{scroll-behavior:auto}
+}
+
+@media (max-width:860px){
+  .interests{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  .hero{min-height:auto;padding:70px 0 84px}
+  .avatar-ring,.avatar,.avatar-fb{width:122px;height:122px}
+  .scroll-cue{display:none}
+  section{padding:54px 0}
+  .row{display:block}
+  .row .when{margin-bottom:4px}
+}
+
+/* ---- small screens ---- */
+@media (max-width:620px){
+  .fac-photo.shot-rasa{max-width:100%}
+  #lightbox{padding:14px}
+  #lightbox .cap{font-size:12.5px;padding:0 14px}
+  .contact-card{padding:20px 18px}
+  .alt-media.grid{gap:7px}
+  .specs span,.fac-specs span{flex-basis:64px;font-size:10.5px}
+  .h h2{font-size:24px}
+  .detail-text h3{font-size:20px}
+  .eyebrow{letter-spacing:1.8px;font-size:11.5px}
+}
+@media (max-width:400px){
+  .wrap{padding:0 18px}
+  .alt-media.grid{grid-template-columns:1fr}
+  .taglist span{font-size:12.5px}
+}
+
+/* long addresses and emails shouldn't push the layout sideways */
+.contact-lines{overflow-wrap:anywhere}
+
+/* the tab bar scrolls on narrow screens — hint that there is more to the right */
+nav .wrap{position:relative}
+@media (max-width:700px){
+  nav::after{
+    content:"";position:absolute;top:0;right:0;width:34px;height:100%;
+    pointer-events:none;z-index:2;
+    background:linear-gradient(to left,rgba(255,255,255,.96),rgba(255,255,255,0));
+  }
+  nav{position:sticky}
+  nav a:not(.brand){padding:7px 10px;font-size:14px}
+  nav .brand{font-size:14.5px}
+}
+
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero" id="top">
+  <canvas id="sky" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="avatar-ring">
+        <img class="avatar" id="avatar" src="assets/profile.jpg" alt="YoungPyo Hong">
+        <div class="avatar-fb" id="avatarFb">YH</div>
+      </div>
+
+      <div class="hero-text">
+        <p class="eyebrow">Time-Domain Astronomy</p>
+        <h1>YoungPyo Hong<span class="full">홍영표 · 洪榮杓 &nbsp;·&nbsp; Y.P. Hong</span></h1>
+        <p class="tagline">
+          I study <b>gamma-ray bursts</b> — mainly their afterglows, and what those reveal
+          about the physics of the explosion. I work with the
+          <a class="hl" href="http://7ds.snu.ac.kr/" target="_blank" rel="noopener">7-Dimensional
+          Telescope</a> for low-resolution spectra and with <span class="hl">RASA36</span> for
+          densely sampled light curves.
+        </p>
+        <p class="affil">
+          Integrated MS–PhD Student in Astronomy &nbsp;·&nbsp; Seoul National University &nbsp;·&nbsp; Advisor: Prof. Myungshin Im
+        </p>
+        <div class="btns">
+          <a class="cta" href="assets/CV_YoungPyo_Hong.pdf">Curriculum Vitae</a>
+          <a href="mailto:hongyp007@snu.ac.kr">Email</a>
+          <a href="https://github.com/hongyp007" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://orcid.org/0009-0002-6238-2326" target="_blank" rel="noopener">ORCID</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">Scroll<span></span></div>
+</div>
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="wrap">
+    <a href="#top" class="brand">YoungPyo Hong</a>
+    <a href="#about"        data-go="about">About</a>
+    <a href="#projects"     data-go="projects">Projects</a>
+    <a href="#publications" data-go="publications">Publications</a>
+    <a href="#background"   data-go="background">Education</a>
+    <a href="#personal"     data-go="personal">Personal</a>
+    <a href="#contact"      data-go="contact">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ==================== INTERESTS ==================== -->
+  
+
+  
+
+  
+
+  <section id="interests" class="rv" data-tab="about">
+    <div class="h"><span class="k">What I work on</span><h2>Research Interests</h2></div>
+    <div class="interests">
+
+      <div class="int tilt">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/>
+          </svg>
+        </div>
+        <h3>Gamma-Ray Bursts</h3>
+        <p>Afterglow emission as a route to the underlying physics — the jet’s angular structure, the shock that produces the light, and the environment the burst went off in.</p>
+      </div>
+
+      <div class="int tilt">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/>
+            <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/>
+          </svg>
+        </div>
+        <h3>Multi-Messenger &amp; Transients</h3>
+        <p>Rapid optical follow-up of gravitational-wave events, kilonovae and other fast transients, combining a low-resolution spectrum at each epoch with a densely sampled light curve.</p>
+      </div>
+
+      <div class="int tilt">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21l6-6M8 16l-3-3 9-9 3 3-9 9zM14 4l6 6M17 13l4 4-3 3-4-4"/>
+          </svg>
+        </div>
+        <h3>Instrumentation</h3>
+        <p>Building the instruments and the software around them. I developed a fully automated follow-up system that connects alert handling, robotic observation and a fast transient search pipeline end to end, and I am interested in instrument development more broadly, including adaptive optics.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about" class="rv" data-tab="about">
+    <div class="h"><span class="k">About</span><h2>How I got here</h2></div>
+    <!--
+      Condensed 2026-08-10 from your 학업계획서 (2026-01-21), section 1.
+      The trajectory is a timeline rather than a paragraph — edit the entries directly.
+    -->
+    <p class="prose">
+      My favourite word in Korean is <strong>우주</strong> — universe. It is written with two
+      characters that both mean <em>house</em>: the space we occupy and the time we exist in,
+      described together as the home we live in. I like that such a short word carries such a
+      heavy idea. Everything begins and ends inside this house, and we still barely know our
+      way around it. Astronomy is how I go looking.
+    </p>
+
+    <div class="tl-wrap">
+      <figure class="tl-photo">
+        <a class="zoom" href="assets/about/age-five.jpg" data-cap="Aged five, already holding the books">
+          <img src="assets/about/age-five.jpg" alt="YoungPyo Hong aged five, holding a stack of books">
+        </a>
+        <figcaption>Where the first line of the timeline comes from.</figcaption>
+      </figure>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">Kindergarten</div>
+        <div class="tl-what">A book about space. I was taken by how the galaxies looked.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">School years</div>
+        <div class="tl-what">The astronomy shelf was the one I kept going back to — though school
+          science never went deep enough, and the interest stalled for a while.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">High school</div>
+        <div class="tl-what"><b>Astronomy Olympiad</b> and an observing club brought it back. The
+          winter school lectures were the most interesting classes I had ever sat in.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">Undergraduate</div>
+        <div class="tl-what">Physics at Yonsei, finished a year early. Worked as an
+          <b>astronomy communicator</b>, and got my first taste of research on the radio
+          telescope at Gwacheon National Science Museum.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2024 – 2025</div>
+        <div class="tl-what">Research intern at <b>Seoul National University</b> — the first time
+          I saw what observational astronomy actually looks like day to day.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">Since 2025</div>
+        <div class="tl-what">Integrated MS–PhD at SNU, working on <b>gamma-ray burst afterglows</b>
+          with 7DT.</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="pq">
+      Plenty of students find the day-to-day of research tedious. I found it more interesting
+      than I expected and wanted to go further in — that was the evidence I needed.
+    </div>
+  </section>
+
+  <!-- ==================== CURRENT WORK ==================== -->
+  <section id="direction" class="rv" data-tab="about">
+    <div class="h"><span class="k">Right now</span><h2>What I'm Working On</h2></div>
+
+    <p class="prose">
+      My main thread is the afterglow of <strong>GRB 251013C</strong>. Its optical and X-ray
+      light curves decline at different rates and break at different times while sharing a
+      spectral index — a combination the standard model does not produce — and I am testing a
+      two-component jet against it, with the 7DT medium-band SED fixing the optical spectrum at
+      each epoch. A second burst is in the queue, and the aim is to get from single events to a
+      sample large enough to say whether that structure is common.
+    </p>
+    <p class="prose">
+      Alongside it I keep the observing side running: the automated ToO system on RASA36, and
+      the alert bot that feeds it. The measurement and the machinery that makes the measurement
+      possible are the same problem to me — in this field the binding constraint is latency, and
+      that is as much an engineering problem as an astronomical one.
+    </p>
+  </section>
+
+
+
+  
+
+  <!-- ==================== PROJECTS ==================== -->
+  <section id="projects" class="rv" data-tab="projects">
+    <div class="h"><span class="k">Selected work</span><h2>Projects</h2></div>
+    <div class="cards">
+
+      <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="assets/grb-sed.png" alt="Light curve and spectral energy distribution of the GRB 251013C afterglow"></div>
+        <div class="card-body">
+          <h3>Jet Structure in GRB 251013C</h3>
+          <p>The optical and X-ray afterglows decline at different rates and break at different
+             times, yet share a spectral index — a combination the standard afterglow model does
+             not produce, and one that energy injection cannot fix. A two-component jet, a bright
+             narrow core plus a slower wide wing, is the interpretation I am currently testing,
+             with the 7DT medium-band SED fixing the optical spectrum at a given epoch.</p>
+          <div class="foot"><span class="tag prep">Ongoing · preliminary</span><span class="tag">Collaborative</span></div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/grb-sed.png" alt="Joint X-ray and optical light curve of GRB 251013C, decomposed into core and wing, with the 7DT medium-band SED at t = 6.52 h"><figcaption>Joint X-ray and optical light curve of GRB 251013C, decomposed into core and wing, with the 7DT medium-band SED at t = 6.52 h</figcaption></figure>
+        <div class="detail-body">
+<p>A gamma-ray burst afterglow normally follows a single set of closure relations linking
+  how fast it fades to how its spectrum is shaped. GRB 251013C does not. The optical and X-ray
+  light curves decline at different rates and break at different times, yet share a spectral
+  index — and neither matches the closure relations.</p>
+  <p>Energy injection cannot account for it, because it does not produce distinct jet break
+  times. A two-component jet — a bright narrow core plus a slower, wider wing — does, and that
+  is the interpretation I am currently testing. The 7DT medium-band SED is what makes the test
+  tractable: measuring the optical spectral index at a given epoch, rather than leaving it free,
+  breaks the degeneracy between the two components.</p>
+  <p class="detail-note">Results are preliminary; the analysis is ongoing.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="assets/filter-transmittance.png" alt="Measured versus specified transmission curve of a 7DT medium-band filter"></div>
+        <div class="card-body">
+          <h3>7DT Medium-Band Filter Characterization</h3>
+          <p>Laboratory measurement and validation of 15 new medium-band filters, setting the
+             photometric calibration that every 7DT science result rests on.</p>
+          <div class="foot"><span class="tag pub">Completed</span><span class="tag">First author</span></div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/filter-transmittance.png" alt="Measured versus manufacturer transmission for the 512 nm medium-band filter, FWHM taken at the 50% threshold"><figcaption>Measured versus manufacturer transmission for the 512 nm medium-band filter, FWHM taken at the 50% threshold</figcaption></figure>
+        <div class="detail-body">
+<p>Every magnitude 7DT produces depends on knowing what its filters actually transmit.
+  I built the measurement procedure for 15 new medium-band filters and validated each measured
+  curve against the manufacturer specification.</p>
+  <p>Central wavelengths and bandwidths agree closely — for the 512 nm filter, a measured FWHM
+  of 28.5 nm against a specified 28.3 nm, with both band edges reproduced to within about a
+  nanometre. That is the level of agreement the medium-band SED work downstream relies on.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb photo">
+          <img src="assets/followup-system.jpg" alt="Illustration of a wide-field telescope observing under the night sky">
+        </div>
+        <div class="card-body">
+          <h3>Automated ToO Follow-up on RASA36</h3>
+          <p>An alert-driven observing pipeline built on TCSpy and gpPy, designed to go from
+             alert to shutter in seconds and to put transient candidate snapshots in front of the
+             team within ten minutes — snapshots for confirmation by eye, not finished photometry.
+             Operational since 2026, with real ToO targets observed.</p>
+          <div class="foot"><span class="tag live">Operational</span><span class="tag">First author</span></div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/facilities/rasa36.jpg" alt="RASA36 at El Sauce Observatory, Chile"><figcaption>RASA36 at El Sauce Observatory, Chile</figcaption></figure>
+        <div class="detail-body">
+<p>An alert-driven observing pipeline built on TCSpy and gpPy. An incoming target of
+  opportunity is scheduled, observed and reduced without a human in the loop, and transient
+  candidate snapshots reach the team within minutes for confirmation by eye.</p>
+  <p>The part that matters is that it is connected end to end: alert handling, robotic
+  observation and the transient search pipeline are one chain rather than three tools someone
+  has to run in sequence at three in the morning. Operational since 2026, with real ToO targets
+  observed.</p>
+  <p class="detail-note">Delivers candidate snapshots for confirmation, not finished calibrated
+  photometry.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb">
+          <img src="assets/gecko-candidate.png" alt="Science, difference and reference image cutouts of a transient candidate"></div>
+        <div class="card-body">
+          <h3>GECKO Gravitational-Wave Follow-up</h3>
+          <p>I searched subtracted RASA36 images for a kilonova counterpart to the neutron
+             star–black hole merger candidate S230518h. No kilonova emerged, but the search did
+             surface AGN variability and a handful of transients that remain unidentified.</p>
+          <div class="foot"><a class="tag pub link-tag" href="https://ui.adsabs.harvard.edu/abs/arXiv:2501.17506" target="_blank" rel="noopener">Published · ApJ 2025&nbsp;↗</a><span class="tag">Co-author</span></div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/gecko-candidate.png" alt="Science, difference and reference cutouts of a transient candidate from the RASA36 search"><figcaption>Science, difference and reference cutouts of a transient candidate from the RASA36 search</figcaption></figure>
+        <div class="detail-body">
+<p>GECKO followed up S230518h, a neutron star–black hole merger candidate, across most
+  of its localization region. My part was the candidate search: going through subtracted RASA36
+  images looking for a kilonova.</p>
+  <p>No kilonova turned up. The search did surface AGN variability and a handful of transients
+  that remain unidentified — which is the ordinary outcome of this work, and the reason the
+  upper limits in the paper mean anything.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <!--
+        CONFIRM BEFORE PUBLISHING — this project was transferred to a commercial partner.
+        Check that the title and your role may be stated publicly. Keep the description
+        free of optical prescriptions, tolerances, and control-loop specifics.
+      -->
+
+      <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb photo">
+          <img src="assets/gcn-bot.jpg" alt="The GCN bot and an example Slack alert for a Fermi-GBM gamma-ray burst"></div>
+        <div class="card-body">
+          <h3>GCN Alert Bot</h3>
+          <p>A real-time listener on the GCN Kafka stream. It parses notices and circulars from
+             Swift, Fermi, Einstein Probe and IceCube, deduplicates repeat triggers, checks whether
+             the target is observable from each site, and posts to Slack with a visibility plot,
+             a tile count, and a one-click Target-of-Opportunity request.</p>
+          <div class="foot">
+            <span class="tag live">Maintained</span>
+            <a class="tag link" href="https://github.com/7DimensionalTelescope/gcn_bot" target="_blank" rel="noopener">
+              GitHub&nbsp;↗
+            </a>
+          </div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/gcn-bot.jpg" alt="A live Fermi-GBM alert as the bot posts it to Slack, with visibility, tile counts and one-click ToO buttons"><figcaption>A live Fermi-GBM alert as the bot posts it to Slack, with visibility, tile counts and one-click ToO buttons</figcaption></figure>
+        <div class="detail-body">
+<p>A real-time listener on the GCN Kafka stream. It parses notices and circulars from
+  Swift, Fermi, Einstein Probe and IceCube, deduplicates repeat triggers from the same event,
+  works out whether the target is observable from each site, and posts the result to Slack with
+  a visibility plot and the number of tiles needed to cover the error region.</p>
+  <p>From there a single button issues a Target-of-Opportunity request. The aim throughout is to
+  collapse the time between an alert arriving and somebody being able to act on it.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb photo">
+          <img src="assets/ao-prototype.jpg" alt="Scale opto-mechanical mockup of the adaptive optics bench"></div>
+        <div class="card-body">
+          <h3>Adaptive Optics System</h3>
+          <p>Team member on an adaptive optics system, working from the optical design through
+             to the opto-mechanical layout of the bench. The project was transferred to a
+             commercial partner, so technical details are not public.</p>
+          <div class="foot"><span class="tag">Team project</span></div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/ao-prototype.jpg" alt="Scale opto-mechanical mockup of the adaptive optics bench"><figcaption>Scale opto-mechanical mockup of the adaptive optics bench</figcaption></figure>
+        <div class="detail-body">
+<p>A team project developing an adaptive optics system, working from the optical design
+  through to the opto-mechanical layout of the bench.</p>
+  <p>The project was transferred to a commercial partner, so the technical details are not
+  public.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FACILITIES ====================
+       These are instruments built and run by the group, not by me.
+       The "What I did" note in each block states my own contribution and
+       nothing beyond it — keep that boundary if you edit this.
+       ==================================================== -->
+  <section id="facilities" class="rv" data-tab="projects">
+    <div class="h"><span class="k">What I observe with</span><h2>Facilities</h2></div>
+
+    <div class="fac">
+      <a class="fac-photo zoom shot-7dt" href="assets/facilities/7dt.jpg" data-cap="The 7DT array at El Sauce Observatory, Chile">
+        <img src="assets/facilities/7dt.jpg" alt="The 7-Dimensional Telescope array at El Sauce Observatory, Chile">
+      </a>
+      <div class="fac-top">
+        <h3><a href="http://7ds.snu.ac.kr/" target="_blank" rel="noopener">7DT — 7-Dimensional Telescope</a></h3>
+        <span class="where">El Sauce Observatory, Chile</span>
+      </div>
+      <p>
+        An array of 50 cm astrographs, each with its own camera and filter wheel, built and
+        operated by my group, the Center for the Gravitational-wave Universe at SNU. Pointed at
+        one field with a different medium band per unit, it returns low-resolution spectroscopy
+        (R ≈ 30–70) over 1.25 deg² in a single visit — which is what lets you follow a
+        transient's spectral shape while it is still fading. I use those data as
+        <strong>medium-band SEDs</strong>.
+      </p>
+      <div class="fac-specs">
+        <div><span>Array</span>16 of 20 × PlaneWave DeltaRho 500, f/3.0, on direct-drive mounts</div>
+        <div><span>Filters</span>35 of 40 medium bands installed, 25 nm FWHM, 400–900 nm</div>
+        <div><span>Surveys</span>Reference imaging · wide-area time-domain · intensive monitoring</div>
+        <div><span>Response</span>Night interrupted and follow-up begun in under a minute</div>
+        <div><span>Software</span>RTCSpy scheduling · Py7DT reduction</div>
+      </div>
+      <div class="mypart">
+        <b>What I did:</b> measured and validated the transmittance curves for 15 of the
+        medium-band filters. The instrument is the work of the 7DT/7DS team.
+      </div>
+    </div>
+
+    <div class="fac">
+      <a class="fac-photo zoom shot-rasa" href="assets/facilities/rasa36.jpg" data-cap="RASA36 at El Sauce Observatory, Chile">
+        <img src="assets/facilities/rasa36.jpg" alt="The RASA36 Schmidt camera at El Sauce Observatory, Chile">
+      </a>
+      <div class="fac-top">
+        <h3>RASA36</h3>
+        <span class="where">Observatorio El Sauce, Chile</span>
+      </div>
+      <p>
+        A 36 cm Rowe–Ackermann Schmidt camera. It has a wide field of view, and it can be
+        repointed quickly; transient follow-up needs both, and RASA36 is useful precisely
+        because it combines them. It sits at the fast end of the group's chain,
+        KMTNet → 7DT → RASA36.
+      </p>
+      <div class="fac-specs">
+        <div><span>Survey</span>All-sky monitoring on a 4697-tile plan</div>
+        <div><span>Response</span>Alert-driven ToO, no human in the loop</div>
+        <div><span>Software</span>TCSpy control · gpPy reduction — a separate stack from 7DT's</div>
+      </div>
+      <div class="mypart">
+        <b>What I did:</b> built the automated ToO follow-up on this telescope with TCSpy and
+        gpPy, and the tile scheduler behind the all-sky monitoring plan.
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PUBLICATIONS ==================== -->
+  <section id="publications" class="rv" data-tab="publications">
+    <div class="h"><span class="k">Papers &amp; circulars</span><h2>Publications</h2></div>
+
+    <div class="sub-h">Refereed</div>
+    <ol class="pubs">
+      <li>
+        <span class="title">GECKO Follow-up Observations of the Binary Neutron Star–Black Hole Merger Candidate S230518h</span>
+        G. S. H. Paek, M. Im, M. Jeong, S.-W. Chang, M. M. Hur, <span class="me">Y.P. Hong</span>,
+        S. Kim, J. Lee, D. Lee, S.-H. Lee<br>
+        <span class="venue">The Astrophysical Journal</span>, 981, 38 (2025)
+        <div class="pub-links">
+          <a href="https://arxiv.org/abs/2501.17506" target="_blank" rel="noopener">arXiv:2501.17506</a>
+          <a href="https://ui.adsabs.harvard.edu/abs/arXiv:2501.17506" target="_blank" rel="noopener">ADS</a>
+        </div>
+      </li>
+    </ol>
+
+    <div class="sub-h">GCN Circulars &nbsp;<span style="font-weight:400;text-transform:none;letter-spacing:0">— first author</span></div>
+    <ol class="pubs">
+      <li>
+        <span class="title">GRB 260223A: 7DT detection and Medium-band SED of Afterglow</span>
+        <span class="me">Y.P. Hong</span>, M. Im, D. Tak, H. Choi, D. Hyun, G. S. H. Paek,
+        S.-W. Chang, J. H. Kim, W.-H. Lee<br>
+        GCN Circular 43863 (2026) · 20 filters, 33 minutes after trigger
+        <div class="pub-links">
+          <a href="https://gcn.nasa.gov/circulars/43863" target="_blank" rel="noopener">Circular</a>
+          <a href="https://ui.adsabs.harvard.edu/abs/2026GCN.43863....1H" target="_blank" rel="noopener">ADS</a>
+        </div>
+      </li>
+      <li>
+        <span class="title">GRB 251013C: 7DT detection and Medium-band SED of Afterglow</span>
+        <span class="me">Y.P. Hong</span>, D. Tak, M. Im, H. Choi, S.-W. Chang, J. H. Kim<br>
+        GCN Circular 42569 (2025) · 14 medium bands plus <em>gri</em>, 6 hours after the burst
+        <div class="pub-links">
+          <a href="https://gcn.nasa.gov/circulars/42569" target="_blank" rel="noopener">Circular</a>
+          <a href="https://ui.adsabs.harvard.edu/abs/2025GCN.42569....1H" target="_blank" rel="noopener">ADS</a>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ==================== TALKS ==================== -->
+  <section id="talks" class="rv" data-tab="publications">
+    <div class="h"><span class="k">Conferences</span><h2>Presentations</h2></div>
+    <ul class="plain">
+      <li>
+        <span class="title">Multi-band Optical SED Analysis of GRB 251013C Afterglow with the 7-Dimensional Telescope</span>
+        <span class="me">Y.P. Hong</span>, D. Tak, M. Im, J. H. Kim, S.-W. Chang, G. S. H. Paek,
+        H. Choi, D. Hyun, W.-H. Lee<br>
+        Talk · KAS Spring Meeting, Suwon, Korea — April 2026
+        <span class="talk-note">Why GRB 251013C breaks the standard afterglow picture: optical
+        and X-ray fade at different rates and break at different times while sharing a spectral
+        index, and what a two-component jet does about it.</span>
+      </li>
+      <li>
+        <span class="title">Automated Wide-Field Rapid Follow-up System for Transient Events with TCSpy &amp; gpPy</span>
+        <span class="me">Y.P. Hong</span>, M. Im, H. Choi, S. Kim, G. S. H. Paek<br>
+        Talk · IASS, Yeosu, Korea — July 2026
+        <span class="talk-note">An observing system that runs from alert handling through
+        robotic observation to a transient search pipeline without a human in the loop, and what
+        it takes to get candidates back within minutes.</span>
+      </li>
+      <li>
+        <span class="title">Filter Transmittance Characterization for 15 New Medium-Band Filters of the 7-Dimensional Telescope</span>
+        <span class="me">Y.P. Hong</span>, M. Im, H. Moon, J. H. Kim, C. Choi<br>
+        Poster · IASS, Osong, Korea — 2025
+        <span class="talk-note">Measuring what the new 7DT medium bands actually transmit, and
+        checking it against what the manufacturer said they would.</span>
+        <div class="pub-links">
+          <a class="poster-link zoom" href="assets/talks/iass2025-filter-poster.jpg"
+             data-cap="Filter Transmittance Characterization for 15 New Medium-Band Filters of 7DT — IASS 2025">
+            View poster
+          </a>
+        </div>
+      </li>
+      <li>
+        <span class="title">Performance and Application of the Radio Telescope in Gwacheon National Science Museum</span>
+        J. Cho et al., incl. <span class="me">Y.P. Hong</span> · IAU General Assembly, Busan, Korea — 2022
+      </li>
+    </ul>
+  </section>
+
+  <!-- ==================== BACKGROUND ==================== -->
+  <section id="background" class="rv" data-tab="background">
+    <div class="h"><span class="k">Where I studied</span><h2>Education</h2></div>
+
+    <div class="row">
+      <div class="when">Since Sep 2025</div>
+      <div class="what"><strong>Integrated MS–PhD in Astronomy</strong>, Seoul National University, Korea
+        <span class="sub">Advisor: Prof. Myungshin Im</span></div>
+    </div>
+    <!-- Uncomment to close the Sep 2024 – Aug 2025 gap:
+    <div class="row">
+      <div class="when">Sep 2024 – Aug 2025</div>
+      <div class="what"><strong>Post-baccalaureate Research Intern</strong>, Seoul National University
+        <span class="sub">7DT transient and multi-messenger follow-up program</span></div>
+    </div>
+    -->
+    <div class="row">
+      <div class="when">Apr 2023 – Jul 2024</div>
+      <div class="what">
+        <strong>Mandatory Military Service</strong>, Republic of Korea Army
+        <span class="sub">Goseong and Tongyeong, Gyeongsangnam-do</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="when">Mar 2020 – Feb 2023</div>
+      <div class="what"><strong>BS in Physics</strong>, Yonsei University, Korea
+        <span class="sub">Graduated one year early, first in department · Admitted as top student</span></div>
+    </div>
+    <div class="row">
+      <div class="when">Mar 2017 – Feb 2020</div>
+      <div class="what"><strong>Bucheon High School</strong>, Bucheon, Korea</div>
+    </div>
+
+    <div class="sub-h">Outreach &amp; Teaching</div>
+    <div class="row">
+      <div class="when">2025 – 2026</div>
+      <div class="what"><strong>Teaching Assistant</strong>, Seoul National University
+        <span class="sub"><em>Man and the Universe</em> · <em>Astronomical Observation &amp; Lab II</em></span></div>
+    </div>
+    <div class="row">
+      <div class="when">2022</div>
+      <div class="what"><strong>Astronomy Communicator, Level II</strong>
+        <span class="sub">Korean Amateur Astronomical Society — training in presenting astronomy to non-specialist audiences</span></div>
+    </div>
+    <div class="row">
+      <div class="when">2021 – 2022</div>
+      <div class="what"><strong>Korean University Knowledge Mentoring Program</strong>
+        <span class="sub">Tutoring and mentoring school students during term and vacations</span></div>
+    </div>
+  </section>
+
+  <!-- ==================== TRAINING ==================== -->
+  <section id="training" class="rv" data-tab="background">
+    <div class="h"><span class="k">Beyond coursework</span><h2>Schools, Workshops &amp; Awards</h2></div>
+
+    <div class="acc">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <span class="nm">Summer &amp; Winter Schools</span>
+        <span class="ct">7 programs</span>
+        <svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-inner">
+          <div class="row"><div class="when">2026</div><div class="what"><strong>ALMA Summer School</strong>
+            <span class="sub">Interferometric data reduction and polarization measurement</span></div></div>
+          <div class="row"><div class="when">2025</div><div class="what"><strong>ALMA Proposal Preparation Workshop</strong>
+            <span class="sub">Developed a sub-mm proposal on the environments of short-GRB merger events</span></div></div>
+          <div class="row"><div class="when">2024, 2025</div><div class="what"><strong>Astro AI Asian Network (A3N) Summer School</strong>
+            <span class="sub">Statistical modeling, deep learning, and generative models for astronomy</span></div></div>
+          <div class="row"><div class="when">2023, 2024</div><div class="what"><strong>KIAS Outer Galaxy and Cosmology Summer School</strong>
+            <span class="sub">Hydrodynamic and N-body simulations, SED fitting, CMB analysis</span></div></div>
+          <div class="row"><div class="when">2023</div><div class="what"><strong>K-GMT Summer School</strong>
+            <span class="sub">Developed a Gemini/GNIRS observing proposal</span></div></div>
+          <div class="row"><div class="when">2022 – 2024</div><div class="what"><strong>School on Numerical Relativity and Gravitational Waves</strong>
+            <span class="sub">Gravitational-wave data analysis with PyCBC, GWpy, and Bilby</span></div></div>
+          <div class="row"><div class="when">2022</div><div class="what"><strong>Radio Summer School</strong>
+            <span class="sub">Receiver systems, interferometry, AGN, and SKA</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <span class="nm">Workshops</span>
+        <span class="ct">6 series</span>
+        <svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-inner">
+          <div class="row"><div class="when">2026</div><div class="what"><strong>Extragalactic Transient Workshop</strong><span class="sub">Online</span></div></div>
+          <div class="row"><div class="when">2025, 2026</div><div class="what"><strong>Woojeon Workshop</strong></div></div>
+          <div class="row"><div class="when">2025</div><div class="what"><strong>Korea Rubin Science Workshop</strong></div></div>
+          <div class="row"><div class="when">2025</div><div class="what"><strong>LSST with AI Workshop</strong></div></div>
+          <div class="row"><div class="when">2025</div><div class="what"><strong>Workshop for the 10th Anniversary of the Discovery of Gravitational Waves</strong></div></div>
+          <div class="row"><div class="when">2024, 2025</div><div class="what"><strong>SKA-Korea Workshop</strong></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <span class="nm">Awards &amp; Scholarships</span>
+        <span class="ct">Selected</span>
+        <svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-inner">
+          <div class="row"><div class="when">2026</div><div class="what"><strong>Next Generation of Researchers in Basic Sciences Scholarship</strong><span class="sub">Seoul National University</span></div></div>
+          <div class="row"><div class="when">2022</div><div class="what"><strong>Awarded Honors</strong><span class="sub">Yonsei University</span></div></div>
+          <div class="row"><div class="when">2021 – 2022</div><div class="what"><strong>Truth Scholarship · Yonsei Vision Scholarship · National Program of Excellence in Software Scholarship</strong></div></div>
+          <div class="row"><div class="when">2020</div><div class="what"><strong>Yonsei Special Scholarship</strong><span class="sub">Full tuition · Admission with highest distinction</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== PERSONAL ====================
+       Four equal topics, image and text alternating sides.
+       Captions live on the photos (hover on desktop, always shown on touch).
+       Edit a caption in BOTH data-cap and <span class="cap"> — data-cap is what
+       the lightbox shows. Missing images remove themselves; a row that loses all
+       of them collapses to text.
+       ==================================================== -->
+  <section id="personal" class="rv" data-tab="personal">
+    <div class="alts">
+
+      <div class="alt">
+        <div class="alt-media grid">
+          <a href="assets/astrophoto/01.jpg" data-cap="Jecheon, Korea · Galaxy S21" target="_blank" rel="noopener">
+            <img src="assets/astrophoto/01.jpg" alt="Jecheon, Korea · Galaxy S21"><span class="cap">Jecheon, Korea · Galaxy S21</span>
+          </a>
+          <a href="assets/astrophoto/02.jpg" data-cap="Yosemite National Park, USA · Sony α7 II" target="_blank" rel="noopener">
+            <img src="assets/astrophoto/02.jpg" alt="Yosemite National Park, USA · Sony α7 II"><span class="cap">Yosemite National Park, USA · Sony α7 II</span>
+          </a>
+        </div>
+        <div class="alt-body">
+          <p class="kicker">Looking up</p>
+          <h3>Astrophotography</h3>
+          <p>
+            The same sky, without a proposal attached. Mostly wide-field Milky Way frames taken
+            on trips — one of them on a phone, which says more about how dark the site was than
+            about the camera.
+          </p>
+        </div>
+      </div>
+
+      <div class="alt">
+        <div class="alt-media">
+          <a href="assets/personal/pc.jpg" data-cap="Ryzen 7 5800X · Radeon RX 6800 XT" target="_blank" rel="noopener">
+            <img src="assets/personal/pc.jpg" alt="Ryzen 7 5800X · Radeon RX 6800 XT"><span class="cap">Ryzen 7 5800X · Radeon RX 6800 XT</span>
+          </a>
+        </div>
+        <div class="alt-body">
+          <p class="kicker">Building things</p>
+          <h3>Computers &amp; Electronics</h3>
+          <p>
+            Electronics are the actual hobby; the PC is only where it shows most. I build my
+            own — the one I work on now runs nested sampling and Overwatch with roughly equal
+            enthusiasm.
+          </p>
+          <div class="specs">
+            <div><span>CPU</span> AMD Ryzen 7 5800X</div>
+            <div><span>GPU</span> MSI Radeon RX 6800 XT Gaming X Trio 16 GB</div>
+            <div><span>Board</span> MSI B550 Gaming Edge WiFi</div>
+            <div><span>Memory</span> Klevv Cras X RGB DDR4-3200 CL16, 32 GB (2 × 16)</div>
+            <div><span>Cooling</span> Cooler Master MasterLiquid 360 Atmos II</div>
+            <div><span>PSU</span> Enermax Revolution D.F. 750 W 80+ Gold</div>
+            <div><span>Case</span> Blavotec Guardian 3100M ARGB</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alt">
+        <div class="alt-media grid">
+          <a href="assets/personal/music-01.jpg" data-cap="OneRepublic — Jamsil Arena, Seoul, 2026" target="_blank" rel="noopener">
+            <img src="assets/personal/music-01.jpg" alt="OneRepublic — Jamsil Arena, Seoul, 2026"><span class="cap">OneRepublic — Jamsil Arena, Seoul, 2026</span>
+          </a>
+          <a href="assets/personal/music-02.jpg" data-cap="OneRepublic — Inspire Arena, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-02.jpg" alt="OneRepublic — Inspire Arena, 2025"><span class="cap">OneRepublic — Inspire Arena, 2025</span>
+          </a>
+          <a href="assets/personal/music-03.jpg" data-cap="Kygo — Seoul, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-03.jpg" alt="Kygo — Seoul, 2025"><span class="cap">Kygo — Seoul, 2025</span>
+          </a>
+          <a href="assets/personal/music-04.jpg" data-cap="Zedd — Seoul, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-04.jpg" alt="Zedd — Seoul, 2025"><span class="cap">Zedd — Seoul, 2025</span>
+          </a>
+          <a href="assets/personal/music-05.jpg" data-cap="Alan Walker — KINTEX, Seoul, 2024" target="_blank" rel="noopener">
+            <img src="assets/personal/music-05.jpg" alt="Alan Walker — KINTEX, Seoul, 2024"><span class="cap">Alan Walker — KINTEX, Seoul, 2024</span>
+          </a>
+          <a href="assets/personal/music-06.jpg" data-cap="Coldplay — Goyang Stadium, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-06.jpg" alt="Coldplay — Goyang Stadium, 2025"><span class="cap">Coldplay — Goyang Stadium, 2025</span>
+          </a>
+        </div>
+        <div class="alt-body">
+          <p class="kicker">Listening</p>
+          <h3>Music &amp; Live Shows</h3>
+          <p>
+            Mostly EDM and pop, and I would rather hear it in a crowd than through headphones.
+            OneRepublic twice, Coldplay, Kygo, Zedd, Alan Walker — six nights I would happily
+            do again.
+            <!-- Replace with your own line if you'd rather. -->
+          </p>
+        </div>
+      </div>
+
+      <div class="alt">
+        <div class="alt-media grid">
+          <a href="assets/personal/games-01.jpg" data-cap="StarCraft" target="_blank" rel="noopener">
+            <img src="assets/personal/games-01.jpg" alt="StarCraft"><span class="cap">StarCraft</span>
+          </a>
+          <a href="assets/personal/games-02.jpg" data-cap="Overwatch" target="_blank" rel="noopener">
+            <img src="assets/personal/games-02.jpg" alt="Overwatch"><span class="cap">Overwatch</span>
+          </a>
+          <a href="assets/personal/games-03.jpg" data-cap="Diablo" target="_blank" rel="noopener">
+            <img src="assets/personal/games-03.jpg" alt="Diablo"><span class="cap">Diablo</span>
+          </a>
+          <a href="assets/personal/games-04.jpg" data-cap="Steam" target="_blank" rel="noopener">
+            <img src="assets/personal/games-04.jpg" alt="Steam"><span class="cap">Steam</span>
+          </a>
+        </div>
+        <div class="alt-body">
+          <p class="kicker">Playing</p>
+          <h3>Games</h3>
+          <p>
+            StarCraft since before I should have been allowed to, and whatever else is in the
+            Steam library when the weather is too bad to point a camera at anything.
+            <!-- Replace with your own line. -->
+          </p>
+        </div>
+      </div>
+
+      <div class="alt">
+        <div class="alt-media grid">
+          <a href="assets/personal/civic-01.jpg" data-cap="Dosan Academy Aegiaeta Leadership Program" target="_blank" rel="noopener">
+            <img src="assets/personal/civic-01.jpg" alt=""><span class="cap">Dosan Academy Aegiaeta Leadership Program</span>
+          </a>
+          <a href="assets/personal/civic-02.jpg" data-cap="The Youth Politics Academy" target="_blank" rel="noopener">
+            <img src="assets/personal/civic-02.jpg" alt=""><span class="cap">The Youth Politics Academy</span>
+          </a>
+        </div>
+        <div class="alt-body">
+          <p class="kicker">Outside the field</p>
+          <h3>Society &amp; Leadership</h3>
+          <p>
+            I spent a term in the <b>Dosan Academy Aegiaeta Leadership Program</b>, built around
+            Ahn Changho's principle of loving others as you love yourself, and before that at the
+            <b>Youth Politics Academy</b>, learning how political systems and governance actually
+            work.
+            <!-- A line of your own: what drew you to these, or what you took from them. -->
+          </p>
+        </div>
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact" class="rv" data-tab="contact">
+    <div class="h"><span class="k">Get in touch</span><h2>Contact</h2></div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <p class="kicker">Email</p>
+        <p class="contact-lines">
+          <a href="mailto:hongyp007@snu.ac.kr">hongyp007@snu.ac.kr</a><br>
+          <a href="mailto:evan77333@gmail.com">evan77333@gmail.com</a>
+        </p>
+        <p class="contact-note">
+          Questions and collaboration are always welcome — please get in touch.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <p class="kicker">Office</p>
+        <p class="contact-lines">
+          Room 102, Astronomy &amp; Space Science Center (Bldg. 45)<br>
+          Department of Physics &amp; Astronomy<br>
+          Seoul National University<br>
+          1 Gwanak-ro, Gwanak-gu<br>
+          Seoul 08826, Republic of Korea
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <p class="kicker">Elsewhere</p>
+        <p class="contact-lines">
+          <a href="assets/CV_YoungPyo_Hong.pdf" target="_blank" rel="noopener">Curriculum Vitae (PDF)</a><br>
+          <a href="https://orcid.org/0009-0002-6238-2326" target="_blank" rel="noopener">ORCID 0009-0002-6238-2326</a><br>
+          <a href="https://github.com/hongyp007" target="_blank" rel="noopener">github.com/hongyp007</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Project detail modal: carousel left, text right. Built by JS from each card's .detail block. -->
+<div id="detail" aria-hidden="true">
+  <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <button class="detail-x" type="button" aria-label="Close">&times;</button>
+    <div class="detail-shots">
+      <div class="shot-stage"></div>
+      <button class="shot-nav prev" type="button" aria-label="Previous">&#8249;</button>
+      <button class="shot-nav next" type="button" aria-label="Next">&#8250;</button>
+      <div class="shot-dots"></div>
+      <div class="shot-cap"></div>
+    </div>
+    <div class="detail-text">
+      <p class="kicker" id="detailKicker"></p>
+      <h3 id="detailTitle"></h3>
+      <div class="detail-content"></div>
+      <div class="detail-foot"></div>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox"><span class="x">&times;</span><img src="" alt=""><div class="cap"></div></div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <canvas id="skyfoot" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div><a href="mailto:hongyp007@snu.ac.kr">hongyp007@snu.ac.kr</a> &nbsp;·&nbsp; Seoul National University, Seoul, Korea</div>
+    <div>Last updated August 2026</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------------------------------------------------
+     ANIMATED SKY
+     Parallax star layers, drifting meteors, and an occasional
+     gamma-ray burst: a point that flares, then throws an
+     expanding shell outward before fading.
+     --------------------------------------------------------- */
+  function Sky(canvas, opts) {
+    var ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+    opts = opts || {};
+    var density  = opts.density  || 0.00016;
+    var meteors  = opts.meteors  !== false;
+    var bursts   = opts.bursts   !== false;
+
+    var W = 0, H = 0, dpr = 1;
+    var stars = [], flying = [], flashes = [];
+    var px = 0, py = 0, tx = 0, ty = 0;      // parallax, eased
+    var running = false, raf = null, t0 = performance.now();
+
+    // opening expansion: 0 = everything at a point, 1 = settled
+    var INTRO_MS = 1600;
+    var introT = opts.intro ? 0 : 1;
+    var introStart = 0;
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+    }
+
+    function build() {
+      var n = Math.max(60, Math.min(420, Math.round(W * H * density)));
+      stars = [];
+      for (var i = 0; i < n; i++) {
+        var depth = Math.random();                       // 0 far … 1 near
+        stars.push({
+          x: Math.random(), y: Math.random(),
+          r: 0.4 + depth * 1.5,
+          d: 0.25 + depth * 1.0,
+          a: 0.25 + Math.random() * 0.6,
+          tw: Math.random() * Math.PI * 2,
+          ts: 0.7 + Math.random() * 1.7,
+          warm: Math.random() < 0.14
+        });
+      }
+    }
+
+    function spawnMeteor() {
+      var fromLeft = Math.random() < 0.5;
+      flying.push({
+        x: fromLeft ? -0.05 * W : W * (0.4 + Math.random() * 0.7),
+        y: H * (Math.random() * 0.45),
+        vx: (fromLeft ? 1 : -1) * (2.6 + Math.random() * 2.4),
+        vy: 1.1 + Math.random() * 1.5,
+        len: 90 + Math.random() * 130,
+        life: 1
+      });
+    }
+
+    function spawnBurst() {
+      flashes.push({
+        x: W * (0.12 + Math.random() * 0.76),
+        y: H * (0.08 + Math.random() * 0.62),
+        t: 0
+      });
+    }
+
+    function draw(now) {
+      var dt = Math.min(64, now - t0); t0 = now;
+      var k = dt / 16.7;
+
+      px += (tx - px) * 0.055;
+      py += (ty - py) * 0.055;
+
+      if (introT < 1) {
+        if (!introStart) introStart = now;
+        introT = Math.min(1, (now - introStart) / INTRO_MS);
+      }
+      // ease-out quart: violent at the start, almost still by the end
+      var e = 1 - Math.pow(1 - introT, 4);
+
+      ctx.clearRect(0, 0, W, H);
+
+      /* stars */
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        s.tw += 0.011 * s.ts * k;
+        var a = s.a * (0.55 + 0.45 * Math.sin(s.tw)) * (0.25 + 0.75 * e);
+        var x = (0.5 + (s.x - 0.5) * e) * W + px * s.d * 26 * e;
+        var y = (0.5 + (s.y - 0.5) * e) * H + py * s.d * 26 * e;
+        if (x < -4 || x > W + 4) continue;
+        ctx.beginPath();
+        ctx.arc(x, y, s.r, 0, 6.2832);
+        ctx.fillStyle = s.warm ? 'rgba(255,214,170,' + a + ')' : 'rgba(226,240,255,' + a + ')';
+        ctx.fill();
+        if (s.r > 1.5) {
+          ctx.beginPath();
+          ctx.arc(x, y, s.r * 3.4, 0, 6.2832);
+          ctx.fillStyle = 'rgba(150,200,255,' + (a * 0.12) + ')';
+          ctx.fill();
+        }
+      }
+
+      /* meteors */
+      for (var m = flying.length - 1; m >= 0; m--) {
+        var f = flying[m];
+        f.x += f.vx * k; f.y += f.vy * k; f.life -= 0.0055 * k;
+        if (f.life <= 0 || f.y > H + 60 || f.x < -260 || f.x > W + 260) { flying.splice(m, 1); continue; }
+        var nrm = Math.hypot(f.vx, f.vy) || 1;
+        var g = ctx.createLinearGradient(f.x, f.y, f.x - f.vx / nrm * f.len, f.y - f.vy / nrm * f.len);
+        g.addColorStop(0, 'rgba(255,255,255,' + (0.85 * f.life) + ')');
+        g.addColorStop(1, 'rgba(160,205,255,0)');
+        ctx.strokeStyle = g; ctx.lineWidth = 1.7; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(f.x, f.y);
+        ctx.lineTo(f.x - f.vx / nrm * f.len, f.y - f.vy / nrm * f.len); ctx.stroke();
+      }
+
+      /* gamma-ray bursts */
+      for (var b = flashes.length - 1; b >= 0; b--) {
+        var fl = flashes[b];
+        fl.t += 0.011 * k;
+        if (fl.t >= 1) { flashes.splice(b, 1); continue; }
+        var rise = Math.min(1, fl.t / 0.09);
+        var fade = Math.pow(1 - fl.t, 2.1);
+        var core = rise * fade;
+
+        var rg = ctx.createRadialGradient(fl.x, fl.y, 0, fl.x, fl.y, 60);
+        rg.addColorStop(0, 'rgba(255,255,255,' + (0.95 * core) + ')');
+        rg.addColorStop(0.22, 'rgba(150,205,255,' + (0.5 * core) + ')');
+        rg.addColorStop(1, 'rgba(120,150,255,0)');
+        ctx.fillStyle = rg;
+        ctx.beginPath(); ctx.arc(fl.x, fl.y, 60, 0, 6.2832); ctx.fill();
+
+        if (fl.t > 0.06) {
+          var rr = (fl.t - 0.06) * 210;
+          ctx.beginPath(); ctx.arc(fl.x, fl.y, rr, 0, 6.2832);
+          ctx.strokeStyle = 'rgba(160,210,255,' + (0.36 * fade) + ')';
+          ctx.lineWidth = 1.5; ctx.stroke();
+        }
+      }
+
+      /* the flash the expansion comes out of */
+      if (introT < 0.75) {
+        var f0 = Math.max(0, 1 - introT / 0.75);
+        var cx = W / 2, cy = H / 2;
+        var core = Math.pow(f0, 2.2);
+        var rg2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, 40 + e * W * 0.55);
+        rg2.addColorStop(0, 'rgba(255,255,255,' + (0.95 * core) + ')');
+        rg2.addColorStop(0.15, 'rgba(178,220,255,' + (0.55 * core) + ')');
+        rg2.addColorStop(0.45, 'rgba(120,150,255,' + (0.18 * core) + ')');
+        rg2.addColorStop(1, 'rgba(90,120,220,0)');
+        ctx.fillStyle = rg2;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, e * Math.max(W, H) * 0.62, 0, 6.2832);
+        ctx.strokeStyle = 'rgba(190,225,255,' + (0.30 * f0) + ')';
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+      }
+
+      // hold the meteors and bursts back until the sky has settled
+      if (introT >= 1) {
+        if (meteors && Math.random() < 0.0022 * k) spawnMeteor();
+        if (bursts  && Math.random() < 0.0011 * k) spawnBurst();
+      }
+
+      raf = requestAnimationFrame(draw);
+    }
+
+    function still() {                       // reduced-motion: one static frame
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        ctx.beginPath();
+        ctx.arc(s.x * W, s.y * H, s.r, 0, 6.2832);
+        ctx.fillStyle = 'rgba(226,240,255,' + s.a + ')';
+        ctx.fill();
+      }
+    }
+
+    var api = {
+      start: function () {
+        if (running) return;
+        running = true;
+        if (reduce) { still(); return; }
+        t0 = performance.now();
+        raf = requestAnimationFrame(draw);
+      },
+      stop: function () {
+        running = false;
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+      },
+      aim: function (nx, ny) { tx = nx; ty = ny; },
+      resize: function () { resize(); if (reduce && running) still(); },
+      burst: function () { if (!reduce) spawnBurst(); },
+      endIntro: function () { introT = 1; }
+    };
+
+    resize();
+    return api;
+  }
+
+  var introOn = document.documentElement.classList.contains('intro');
+  var heroSky = Sky(document.getElementById('sky'), { intro: introOn });
+  var footSky = Sky(document.getElementById('skyfoot'), { density: 0.00011, meteors: false, bursts: false });
+
+  window.addEventListener('resize', function () {
+    if (heroSky) heroSky.resize();
+    if (footSky) footSky.resize();
+  });
+
+  // Animate a canvas only while it is on screen AND the tab is focused.
+  var watched = [];
+  function watch(el, sky) {
+    if (!el || !sky) return;
+    var rec = { sky: sky, inView: true };
+    watched.push(rec);
+    if (!('IntersectionObserver' in window)) { sky.start(); return; }
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        rec.inView = e.isIntersecting;
+        if (e.isIntersecting && !document.hidden) sky.start(); else sky.stop();
+      });
+    }, { threshold: 0 }).observe(el);
+  }
+  watch(document.querySelector('.hero'), heroSky);
+  watch(document.querySelector('footer'), footSky);
+
+  document.addEventListener('visibilitychange', function () {
+    watched.forEach(function (r) {
+      if (document.hidden) r.sky.stop();
+      else if (r.inView) r.sky.start();
+    });
+  });
+
+  /* ---------------------------------------------------------
+     Mark the opening as seen, and let any deliberate action cut
+     it short — nobody should have to wait through it twice.
+     --------------------------------------------------------- */
+  if (introOn) {
+    try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+    var skip = function () {
+      if (heroSky) heroSky.endIntro();
+      document.documentElement.classList.remove('intro');
+      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+        window.removeEventListener(ev, skip);
+      });
+    };
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+      window.addEventListener(ev, skip, { passive: true });
+    });
+    setTimeout(skip, 2600);   // safety net: never leave the class on
+  }
+
+  // Parallax from the pointer, plus a burst wherever you click the sky.
+  var hero = document.querySelector('.hero');
+  if (hero && heroSky) {
+    hero.addEventListener('mousemove', function (e) {
+      var r = hero.getBoundingClientRect();
+      heroSky.aim((e.clientX - r.left) / r.width * 2 - 1, (e.clientY - r.top) / r.height * 2 - 1);
+    });
+    hero.addEventListener('mouseleave', function () { heroSky.aim(0, 0); });
+    hero.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      heroSky.burst();
+    });
+  }
+
+  /* ---------------------------------------------------------
+     CARD TILT + CURSOR SPOTLIGHT
+     --------------------------------------------------------- */
+  if (!reduce && window.matchMedia('(hover:hover)').matches) {
+    document.querySelectorAll('.tilt').forEach(function (el) {
+      el.addEventListener('mousemove', function (e) {
+        var r = el.getBoundingClientRect();
+        var mx = e.clientX - r.left, my = e.clientY - r.top;
+        el.style.setProperty('--mx', mx + 'px');
+        el.style.setProperty('--my', my + 'px');
+        var rx = ((my / r.height) - 0.5) * -4.5;
+        var ry = ((mx / r.width) - 0.5) * 4.5;
+        el.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-4px)';
+      });
+      el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     PROJECT DETAIL MODAL
+     Each card carries a hidden .detail block holding its photos
+     and long description; clicking the card lifts that into the
+     modal. Adding photos to a project means adding <figure> tags
+     to that block — nothing here needs changing.
+     --------------------------------------------------------- */
+  (function () {
+    var modal = document.getElementById('detail');
+    if (!modal) return;
+
+    var panel   = modal.querySelector('.detail-panel');
+    var stage   = modal.querySelector('.shot-stage');
+    var dotsBox = modal.querySelector('.shot-dots');
+    var capBox  = modal.querySelector('.shot-cap');
+    var prevBtn = modal.querySelector('.shot-nav.prev');
+    var nextBtn = modal.querySelector('.shot-nav.next');
+    var kicker  = modal.querySelector('#detailKicker');
+    var titleEl = modal.querySelector('#detailTitle');
+    var content = modal.querySelector('.detail-content');
+    var footEl  = modal.querySelector('.detail-foot');
+    var closeBt = modal.querySelector('.detail-x');
+
+    var shots = [], idx = 0, lastFocus = null;
+
+    function render() {
+      stage.querySelectorAll('img').forEach(function (im, i) { im.classList.toggle('on', i === idx); });
+      dotsBox.querySelectorAll('button').forEach(function (d, i) { d.classList.toggle('on', i === idx); });
+      capBox.textContent = shots.length ? shots[idx].cap : '';
+      var many = shots.length > 1;
+      prevBtn.hidden = nextBtn.hidden = !many;
+      dotsBox.hidden = !many;
+    }
+    function go(n) {
+      if (!shots.length) return;
+      idx = (n + shots.length) % shots.length;
+      render();
+    }
+
+    function open(card) {
+      var src = card.querySelector('.detail');
+      if (!src) return;
+      lastFocus = document.activeElement;
+
+      shots = [].slice.call(src.querySelectorAll('figure.shot')).map(function (f) {
+        var im = f.querySelector('img');
+        var cp = f.querySelector('figcaption');
+        return { src: im.getAttribute('src'), alt: im.getAttribute('alt') || '',
+                 cap: cp ? cp.textContent.trim() : '' };
+      });
+
+      stage.innerHTML = '';
+      dotsBox.innerHTML = '';
+      shots.forEach(function (sh, i) {
+        var im = document.createElement('img');
+        im.src = sh.src; im.alt = sh.alt;
+        stage.appendChild(im);
+        var d = document.createElement('button');
+        d.type = 'button';
+        d.setAttribute('aria-label', 'Image ' + (i + 1));
+        d.addEventListener('click', function () { go(i); });
+        dotsBox.appendChild(d);
+      });
+
+      var k = card.querySelector('.kicker');
+      kicker.textContent = k ? k.textContent : '';
+      kicker.hidden = !k;
+      titleEl.textContent = card.querySelector('h3').textContent.trim();
+      content.innerHTML = (src.querySelector('.detail-body') || {}).innerHTML || '';
+
+      // reuse the card's own tags and links in the modal footer
+      footEl.innerHTML = '';
+      var foot = card.querySelector('.foot');
+      if (foot) {
+        [].slice.call(foot.children).forEach(function (el) {
+          footEl.appendChild(el.cloneNode(true));
+        });
+      }
+
+      idx = 0; render();
+      modal.classList.add('on');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBt.focus();
+    }
+
+    function close() {
+      modal.classList.remove('on');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      stage.innerHTML = ''; dotsBox.innerHTML = ''; shots = [];
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.card').forEach(function (card) {
+      if (!card.querySelector('.detail')) return;
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;         // let real links through
+        open(card);
+      });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
+      });
+    });
+
+    closeBt.addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    panel.addEventListener('click', function (e) { e.stopPropagation(); });
+    prevBtn.addEventListener('click', function () { go(idx - 1); });
+    nextBtn.addEventListener('click', function () { go(idx + 1); });
+    document.addEventListener('keydown', function (e) {
+      if (!modal.classList.contains('on')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') go(idx - 1);
+      else if (e.key === 'ArrowRight') go(idx + 1);
+    });
+  })();
+
+  /* ---------------------------------------------------------
+     ACCORDIONS
+     --------------------------------------------------------- */
+  document.querySelectorAll('.acc-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var acc = btn.parentElement;
+      var panel = acc.querySelector('.acc-panel');
+      var open = acc.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.style.maxHeight = open ? (panel.scrollHeight + 'px') : '0px';
+    });
+  });
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.acc.open .acc-panel').forEach(function (p) {
+      p.style.maxHeight = p.scrollHeight + 'px';
+    });
+  });
+
+  /* ---------------------------------------------------------
+     SCROLL PROGRESS + REVEAL + ACTIVE NAV
+     --------------------------------------------------------- */
+  var bar = document.getElementById('progress');
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop || document.body.scrollTop) / max * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var rvs = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -50px 0px' });
+    rvs.forEach(function (e) { io.observe(e); });
+
+  } else {
+    rvs.forEach(function (e) { e.classList.add('in'); });
+  }
+
+  /* ---------------------------------------------------------
+     TAB NAVIGATION
+     Each nav item reveals one group of sections instead of
+     scrolling to it. The URL hash keeps tabs shareable and makes
+     browser back/forward work. Without JS every section stays
+     visible and the nav behaves as ordinary anchors.
+     --------------------------------------------------------- */
+  (function () {
+    var tabLinks = [].slice.call(document.querySelectorAll('nav a[data-go]'));
+    var panes = [].slice.call(document.querySelectorAll('section[data-tab]'));
+    if (!tabLinks.length || !panes.length) return;
+
+    var names = tabLinks.map(function (a) { return a.getAttribute('data-go'); });
+    document.body.classList.add('tabs');
+
+    function show(name, push) {
+      if (names.indexOf(name) === -1) name = names[0];
+
+      var shown = [];
+      panes.forEach(function (s) {
+        var on = s.getAttribute('data-tab') === name;
+        s.classList.toggle('on', on);
+        s.classList.remove('last-on');
+        if (on) { s.classList.add('in'); shown.push(s); }
+      });
+      if (shown.length) shown[shown.length - 1].classList.add('last-on');
+      tabLinks.forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('data-go') === name);
+      });
+
+      // Panels start collapsed; scrollHeight is only measurable once visible.
+      document.querySelectorAll('.acc.open .acc-panel').forEach(function (p) {
+        p.style.maxHeight = p.scrollHeight + 'px';
+      });
+
+      if (push && history.replaceState) history.replaceState(null, '', '#' + name);
+      onScroll();
+    }
+
+    function current() {
+      var h = (location.hash || '').replace('#', '');
+      return names.indexOf(h) !== -1 ? h : names[0];
+    }
+
+    tabLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        show(a.getAttribute('data-go'), true);
+        var nav = document.querySelector('nav');
+        var y = nav.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+
+    window.addEventListener('hashchange', function () { show(current(), false); });
+    show(current(), false);
+  })();
+
+  /* ---------------------------------------------------------
+     IMAGE FALLBACKS
+     --------------------------------------------------------- */
+  var av = document.getElementById('avatar'), fb = document.getElementById('avatarFb');
+  if (av) {
+    av.addEventListener('error', function () { av.style.display = 'none'; fb.style.display = 'flex'; });
+    if (av.complete && av.naturalWidth === 0) av.dispatchEvent(new Event('error'));
+  }
+  document.querySelectorAll('.thumb img').forEach(function (img) {
+    img.addEventListener('error', function () { img.parentElement.classList.add('void'); });
+    if (img.complete && img.naturalWidth === 0) img.dispatchEvent(new Event('error'));
+  });
+
+  /* ---------------------------------------------------------
+     TOPIC IMAGES + LIGHTBOX
+     Every image under .alt-media opens in the lightbox. An image
+     whose file is missing removes itself; if a row loses all of
+     its images the row collapses to text on its own.
+     --------------------------------------------------------- */
+  (function () {
+    var box = document.getElementById('lightbox');
+    if (!box) return;
+    var boxImg = box.querySelector('img');
+    var boxCap = box.querySelector('.cap');
+
+    function open(src, cap) {
+      boxImg.src = src;
+      boxCap.textContent = cap || '';
+      box.classList.add('on');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      box.classList.remove('on');
+      boxImg.src = '';
+      document.body.style.overflow = '';
+    }
+    box.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    // every one-off zoomable image on the page shares this lightbox:
+    // the poster, the facility photos, the childhood photo, the service photo
+    document.querySelectorAll('a.zoom').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        open(a.getAttribute('href'), a.getAttribute('data-cap') || '');
+      });
+    });
+
+    document.querySelectorAll('.alt').forEach(function (row) {
+      var media = row.querySelector('.alt-media');
+      if (!media) return;
+      var links = [].slice.call(media.querySelectorAll('a'));
+      var dead = 0;
+
+      links.forEach(function (a) {
+        var img = a.querySelector('img');
+        var cap = a.getAttribute('data-cap') || '';
+
+        function drop() {
+          a.hidden = true;
+          if (++dead === links.length) row.classList.add('no-media');
+        }
+        img.addEventListener('error', drop);
+        if (img.complete && img.naturalWidth === 0) drop();
+        img.addEventListener('load', function () { if (!img.alt) img.alt = cap; });
+
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          open(a.getAttribute('href'), cap);
+        });
+      });
+    });
+  })();
+})();
+</script>
+
+</body>
+</html>
