@@ -481,6 +481,8 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
 /* ---- timeline photo inset ---- */
 .tl-wrap{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start;margin-top:28px}
 .tl-wrap .tl{margin-top:4px}
+/* left column: childhood photo at the top, latest photo at the bottom beside "Since 2025" */
+.tl-photos{display:flex;flex-direction:column;justify-content:space-between;gap:26px;align-self:stretch}
 .tl-photo{margin:0}
 .tl-photo a{display:block;border-radius:10px;overflow:hidden;border:1px solid var(--rule);
             background:var(--bg-soft);cursor:zoom-in}
@@ -489,22 +491,17 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
 .tl-photo figcaption{font-size:12.6px;line-height:1.5;color:var(--ink-faint);margin-top:9px}
 @media (max-width:700px){
   .tl-wrap{grid-template-columns:1fr;gap:20px}
-  .tl-photo{max-width:230px}
+  .tl-photos{flex-direction:row;align-items:flex-start;gap:14px}
+  .tl-photo{flex:1;max-width:230px}
 }
 
-/* small photo inside a timeline entry */
-.tl-inline{display:block;max-width:340px;margin-top:11px;border-radius:9px;overflow:hidden;
-           border:1px solid var(--rule);cursor:zoom-in}
-.tl-inline img{width:100%;display:block;transition:transform .45s var(--ease)}
-.tl-inline:hover img{transform:scale(1.04)}
-.tl-inline-cap{display:block;font-size:12.6px;color:var(--ink-faint);margin-top:6px}
 
 /* badges photo + note at the top of Schools, Workshops & Awards */
-.badges{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:center;margin:0 0 26px}
-.badges-photo{display:block;border-radius:11px;overflow:hidden;border:1px solid var(--rule);cursor:zoom-in}
+.badges{margin:0 0 26px}
+.badges .prose{margin:14px 0 0}
+.badges-photo{display:block;max-width:760px;border-radius:11px;overflow:hidden;border:1px solid var(--rule);cursor:zoom-in}
 .badges-photo img{width:100%;display:block;transition:transform .5s var(--ease)}
 .badges-photo:hover img{transform:scale(1.03)}
-@media (max-width:760px){ .badges{grid-template-columns:1fr} }
 
 /* ---- timeline ---- */
 .tl{position:relative;margin:28px 0 0;padding-left:26px}
@@ -788,12 +785,20 @@ nav .wrap{position:relative}
     </p>
 
     <div class="tl-wrap">
-      <figure class="tl-photo">
-        <a class="zoom" href="assets/about/age-five.jpg" data-cap="Aged five, already holding the books">
-          <img src="assets/about/age-five.jpg" alt="YoungPyo Hong aged five, holding a stack of books">
-        </a>
-        <figcaption>A childhood photo.</figcaption>
-      </figure>
+      <div class="tl-photos">
+        <figure class="tl-photo">
+          <a class="zoom" href="assets/about/age-five.jpg" data-cap="Aged five, already holding the books">
+            <img src="assets/about/age-five.jpg" alt="YoungPyo Hong aged five, holding a stack of books">
+          </a>
+          <figcaption>A childhood photo.</figcaption>
+        </figure>
+        <figure class="tl-photo">
+          <a class="zoom" href="assets/about/kas-talk.jpg" data-cap="Presenting GRB 251013C at the KAS Spring Meeting, April 2026">
+            <img src="assets/about/kas-talk.jpg" alt="Presenting GRB 251013C at the Korean Astronomical Society Spring Meeting, 2026">
+          </a>
+          <figcaption>Presenting GRB 251013C at the KAS Spring Meeting, 2026.</figcaption>
+        </figure>
+      </div>
     <div class="tl">
       <div class="tl-item">
         <div class="tl-when">Kindergarten</div>
@@ -825,12 +830,7 @@ nav .wrap{position:relative}
       <div class="tl-item">
         <div class="tl-when">Since 2025</div>
         <div class="tl-what">Integrated MS–PhD at SNU, on <b>gamma-ray burst afterglows</b> with
-          7DT and RASA36.
-          <a class="tl-inline zoom" href="assets/about/kas-talk.jpg"
-             data-cap="Presenting GRB 251013C at the KAS Spring Meeting, April 2026">
-            <img src="assets/about/kas-talk.jpg" alt="Presenting GRB 251013C at the Korean Astronomical Society Spring Meeting, 2026">
-          </a>
-          <span class="tl-inline-cap">Presenting GRB 251013C at the KAS Spring Meeting, 2026.</span></div>
+          7DT and RASA36.</div>
       </div>
     </div>
     </div>
@@ -1293,12 +1293,11 @@ nav .wrap{position:relative}
 
     <div class="badges">
       <a class="badges-photo zoom" href="assets/personal/badges.jpg"
-         data-cap="Name badges from schools, workshops and meetings, 2017 – 2026">
+         data-cap="Name badges from schools, workshops and meetings">
         <img src="assets/personal/badges.jpg" alt="Name badges collected from astronomy schools, workshops and meetings">
       </a>
       <p class="prose">
-        Every badge here is a school, workshop or meeting I have attended — from an Astronomy
-        Olympiad weekend in high school to this year's conferences. They gave me much of what I know
+        Every badge here is a school, workshop or meeting I have attended. They gave me much of what I know
         outside my own projects, and introduced me to people I still trade ideas with.
       </p>
     </div>
