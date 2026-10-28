@@ -891,10 +891,11 @@ nav .wrap{position:relative}
         <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
         <figure class="shot"><img src="assets/grb251013c-sed.png" alt="Medium-band optical SED of the GRB 251013C afterglow from 7DT, 6.3 hours after the burst"><figcaption>The 7DT medium-band SED of the GRB 251013C afterglow, 6.3 hours after the burst (GCN Circ. 42569). Horizontal bars show filter widths: 25 nm medium bands against the much broader Sloan g, r and i.</figcaption></figure>
         <div class="detail-body">
-  <p>GRB 251013C did something afterglows are not supposed to do: partway through its decline
-  it brightened again. 7DT observed it about six hours after the burst, and that single epoch
-  happens to fall during the rebrightening — so it captures the optical spectrum at exactly the
-  moment the standard picture stops working.</p>
+  <p>Partway through its decline, the afterglow of GRB 251013C brightened again, and its
+  temporal and spectral indices (α, β) differ between the early and late data — which a single
+  standard afterglow component does not explain. 7DT observed it about six hours after the
+  burst, during the rebrightening, so its medium-band SED records the optical spectrum in that
+  phase.</p>
   <p>Combining the 7DT medium-band SED with light curves from collaborating facilities, I am
   testing what physical process could produce the rebrightening, with an additional flare
   component currently the main candidate. The results will appear in a paper led by Dr.
@@ -942,19 +943,21 @@ nav .wrap{position:relative}
           <img src="assets/filter-transmittance.png" alt="Measured versus specified transmission curve of a 7DT medium-band filter"></div>
         <div class="card-body">
           <h3>7DT Medium-Band Filter Characterization</h3>
-          <p>Laboratory measurement and validation of 15 new medium-band filters, setting the
-             photometric calibration that every 7DT science result rests on.</p>
+          <p>A laboratory setup I built to measure the transmission curves of 15 new 7DT
+             medium-band filters, with each curve validated against the manufacturer's.</p>
           <div class="foot"><span class="tag pub">Completed</span><span class="tag">First author</span></div>
       <div class="detail" hidden>
         <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
         <figure class="shot"><img src="assets/filter-transmittance.png" alt="Measured versus manufacturer transmission for the 512 nm medium-band filter, FWHM taken at the 50% threshold"><figcaption>Measured versus manufacturer transmission for the 512 nm medium-band filter, FWHM taken at the 50% threshold</figcaption></figure>
         <div class="detail-body">
-<p>Every magnitude 7DT produces depends on knowing what its filters actually transmit.
-  I built the measurement procedure for 15 new medium-band filters and validated each measured
-  curve against the manufacturer specification.</p>
+<p>I built the laboratory setup for measuring the transmission curves of 15 new medium-band
+  filters; the hardest part was producing a well-collimated beam. At each wavelength I compared
+  the camera signal (ADU) through an empty filter slot with the signal through the filter, which
+  gives the transmission curve, and then validated each measured curve against the
+  manufacturer's specification.</p>
   <p>Central wavelengths and bandwidths agree closely — for the 512 nm filter, a measured FWHM
   of 28.5 nm against a specified 28.3 nm, with both band edges reproduced to within about a
-  nanometre. That is the level of agreement the medium-band SED work downstream relies on.</p>
+  nanometre.</p>
         </div>
       </div>
         </div>
@@ -1010,8 +1013,9 @@ nav .wrap{position:relative}
   works out whether the target is observable from each site, and posts the result to Slack with
   a visibility plot and the number of tiles needed to cover the error region.</p>
   <p>It then submits the Target-of-Opportunity request to the telescopes automatically, and the
-  same request can be sent by hand from the Slack message. The aim throughout is to collapse the
-  time between an alert arriving and a telescope acting on it.</p>
+  same request can be sent by hand from the Slack message. I built it because raw notices are
+  hard to act on quickly: parsed into one readable message, an event is noticed at once, and the
+  same parsing is what makes fully automatic ToO requests possible.</p>
         </div>
       </div>
         </div>
@@ -1064,8 +1068,8 @@ nav .wrap{position:relative}
         An array of 50 cm astrographs, each with its own camera and filter wheel, built and
         operated by my group, the Center for the Gravitational-wave Universe at SNU. Pointed at
         one field with a different medium band per unit, it returns low-resolution spectroscopy
-        (R ≈ 30–70) over 1.25 deg² in a single visit — which is what lets you follow a
-        transient's spectral shape while it is still fading. I use those data as
+        (R ≈ 30–70) over 1.25 deg² in a single visit, and can repeat it at multiple epochs to
+        follow how a transient's spectrum changes. I use those data as
         <strong>medium-band SEDs</strong>.
       </p>
       <div class="fac-specs">
@@ -1097,9 +1101,9 @@ nav .wrap{position:relative}
         <span class="where">Observatorio El Sauce, Chile</span>
       </div>
       <p>
-        A 0.36 m Rowe–Ackermann Schmidt camera. It has a wide field of view, and it can be
-        repointed quickly; transient follow-up needs both, and RASA36 is useful precisely
-        because it combines them.
+        A 0.36 m Rowe–Ackermann Schmidt camera. Its strengths are a wide field of view, a rapid
+        response and a fully automated, end-to-end transient search; together they let us start
+        observing a transient quickly and build a continuous light curve with little effort.
       </p>
       <div class="fac-specs">
         <div><span>Field</span>2.67° × 2.67°</div>
@@ -1188,19 +1192,11 @@ nav .wrap{position:relative}
     <div class="h"><span class="k">Conferences</span><h2>Presentations</h2></div>
     <ul class="plain">
       <li>
-        <span class="title">Multi-band Optical SED Analysis of GRB 251013C Afterglow with the 7-Dimensional Telescope</span>
-        <span class="me">Y.P. Hong</span>, D. Tak, M. Im, J. H. Kim, S.-W. Chang, G. S. H. Paek,
-        H. Choi, D. Hyun, W.-H. Lee<br>
-        Talk · KAS Spring Meeting, Suwon, Korea — April 2026
-        <span class="talk-note">The multi-band optical SED that 7DT recorded for the GRB 251013C
-        afterglow, and why this burst does not fit the standard afterglow picture.</span>
-      </li>
-      <li>
         <span class="title">Automated Wide-Field Rapid Follow-up System for Transient Events with TCSpy &amp; gpPy</span>
         <span class="me">Y.P. Hong</span>, M. Im, H. Choi, S. Kim, G. S. H. Paek<br>
-        Talk · KAS Fall Meeting, Gwacheon, Korea — 2026
-        <span class="talk-note">The same system presented to the Korean Astronomical Society,
-        with its first operational follow-ups.</span>
+        Talk · KAS Fall Meeting, Gwacheon, Korea — October 2026
+        <span class="talk-note">An updated version of the system: a faster response, and now able
+        to follow up gravitational-wave alerts as well.</span>
       </li>
       <li>
         <span class="title">Automated Wide-Field Rapid Follow-up System for Transient Events with TCSpy &amp; gpPy</span>
@@ -1211,11 +1207,20 @@ nav .wrap{position:relative}
         observing within 30 seconds of an alert, candidates back in about 40 minutes.</span>
       </li>
       <li>
+        <span class="title">Multi-band Optical SED Analysis of GRB 251013C Afterglow with the 7-Dimensional Telescope</span>
+        <span class="me">Y.P. Hong</span>, D. Tak, M. Im, J. H. Kim, S.-W. Chang, G. S. H. Paek,
+        H. Choi, D. Hyun, W.-H. Lee<br>
+        Talk · KAS Spring Meeting, Suwon, Korea — April 2026
+        <span class="talk-note">The multi-band optical SED that 7DT recorded for the GRB 251013C
+        afterglow, and why its temporal and spectral indices, which differ between early and late
+        times, do not fit the standard afterglow picture.</span>
+      </li>
+      <li>
         <span class="title">Filter Transmittance Characterization for 15 New Medium-Band Filters of the 7-Dimensional Telescope</span>
         <span class="me">Y.P. Hong</span>, M. Im, H. Moon, J. H. Kim, C. Choi<br>
-        Poster · IASS, Osong, Korea — 2025
-        <span class="talk-note">Measuring what the new 7DT medium bands actually transmit, and
-        checking it against what the manufacturer said they would.</span>
+        Poster · IASS, Osong, Korea — July 2025
+        <span class="talk-note">Laboratory transmission measurements of the new 7DT medium-band
+        filters, compared against the manufacturer's curves.</span>
         <div class="pub-links">
           <a class="poster-link zoom" href="assets/talks/iass2025-filter-poster.jpg"
              data-cap="Filter Transmittance Characterization for 15 New Medium-Band Filters of 7DT — IASS 2025">
@@ -1225,7 +1230,7 @@ nav .wrap{position:relative}
       </li>
       <li>
         <span class="title">Performance and Application of the Radio Telescope in Gwacheon National Science Museum</span>
-        J. Cho et al., incl. <span class="me">Y.P. Hong</span> · IAU General Assembly, Busan, Korea — 2022
+        J. Cho et al., incl. <span class="me">Y.P. Hong</span> · IAU General Assembly, Busan, Korea — August 2022
       </li>
     </ul>
   </section>
@@ -1297,7 +1302,7 @@ nav .wrap{position:relative}
       </a>
       <p class="prose">
         Every badge here is a school, workshop or meeting I have attended. They gave me much of what I know
-        outside my own projects, and introduced me to people I still trade ideas with.
+        outside my own projects.
       </p>
     </div>
 
@@ -1388,9 +1393,10 @@ nav .wrap{position:relative}
           <p class="kicker">Looking up</p>
           <h3>Astrophotography</h3>
           <p>
-            The same sky, without a proposal attached. Mostly wide-field Milky Way frames taken
-            on trips — one of them on a phone, which says more about how dark the site was than
-            about the camera.
+            A hobby since high school. I shoot with whatever I have, from a phone to a mirrorless
+            camera, and whenever I travel somewhere with a dark sky I start taking pictures right
+            away. Getting a beautiful landscape and the night sky into a single frame is one of
+            the most satisfying things I know.
           </p>
         </div>
       </div>
@@ -1405,9 +1411,8 @@ nav .wrap{position:relative}
           <p class="kicker">Building things</p>
           <h3>Computers &amp; Electronics</h3>
           <p>
-            Electronics are the actual hobby; the PC is only where it shows most. I build my
-            own — the one I work on now runs nested sampling and Overwatch with roughly equal
-            enthusiasm.
+            I simply like computers. I enjoy building them and keeping up with hardware news,
+            and at home my PC is mostly for games.
           </p>
           <div class="specs">
             <div><span>CPU</span> AMD Ryzen 7 5800X</div>
@@ -1426,17 +1431,17 @@ nav .wrap{position:relative}
           <a href="assets/personal/music-01.jpg" data-cap="OneRepublic — Jamsil Arena, Seoul, 2026" target="_blank" rel="noopener">
             <img src="assets/personal/music-01.jpg" alt="OneRepublic — Jamsil Arena, Seoul, 2026"><span class="cap">OneRepublic — Jamsil Arena, Seoul, 2026</span>
           </a>
-          <a href="assets/personal/music-02.jpg" data-cap="OneRepublic — Inspire Arena, 2025" target="_blank" rel="noopener">
-            <img src="assets/personal/music-02.jpg" alt="OneRepublic — Inspire Arena, 2025"><span class="cap">OneRepublic — Inspire Arena, 2025</span>
+          <a href="assets/personal/music-02.jpg" data-cap="OneRepublic — Inspire Arena, Incheon, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-02.jpg" alt="OneRepublic — Inspire Arena, Incheon, 2025"><span class="cap">OneRepublic — Inspire Arena, Incheon, 2025</span>
           </a>
-          <a href="assets/personal/music-03.jpg" data-cap="Kygo — Seoul, 2025" target="_blank" rel="noopener">
-            <img src="assets/personal/music-03.jpg" alt="Kygo — Seoul, 2025"><span class="cap">Kygo — Seoul, 2025</span>
+          <a href="assets/personal/music-03.jpg" data-cap="Kygo — Inspire Arena, Incheon, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-03.jpg" alt="Kygo — Inspire Arena, Incheon, 2025"><span class="cap">Kygo — Inspire Arena, Incheon, 2025</span>
           </a>
-          <a href="assets/personal/music-04.jpg" data-cap="Zedd — Seoul, 2025" target="_blank" rel="noopener">
-            <img src="assets/personal/music-04.jpg" alt="Zedd — Seoul, 2025"><span class="cap">Zedd — Seoul, 2025</span>
+          <a href="assets/personal/music-04.jpg" data-cap="Zedd — Inspire Arena, Incheon, 2025" target="_blank" rel="noopener">
+            <img src="assets/personal/music-04.jpg" alt="Zedd — Inspire Arena, Incheon, 2025"><span class="cap">Zedd — Inspire Arena, Incheon, 2025</span>
           </a>
-          <a href="assets/personal/music-05.jpg" data-cap="Alan Walker — KINTEX, Seoul, 2024" target="_blank" rel="noopener">
-            <img src="assets/personal/music-05.jpg" alt="Alan Walker — KINTEX, Seoul, 2024"><span class="cap">Alan Walker — KINTEX, Seoul, 2024</span>
+          <a href="assets/personal/music-05.jpg" data-cap="Alan Walker — KINTEX, Goyang, 2024" target="_blank" rel="noopener">
+            <img src="assets/personal/music-05.jpg" alt="Alan Walker — KINTEX, Goyang, 2024"><span class="cap">Alan Walker — KINTEX, Goyang, 2024</span>
           </a>
           <a href="assets/personal/music-06.jpg" data-cap="Coldplay — Goyang Stadium, 2025" target="_blank" rel="noopener">
             <img src="assets/personal/music-06.jpg" alt="Coldplay — Goyang Stadium, 2025"><span class="cap">Coldplay — Goyang Stadium, 2025</span>
@@ -1446,9 +1451,8 @@ nav .wrap{position:relative}
           <p class="kicker">Listening</p>
           <h3>Music &amp; Live Shows</h3>
           <p>
-            Mostly EDM and pop, and I would rather hear it in a crowd than through headphones.
-            OneRepublic twice, Coldplay, Kygo, Zedd, Alan Walker — six nights I would happily
-            do again.
+            Mostly EDM and pop. I enjoy it as much through headphones as live at a concert —
+            OneRepublic twice, Coldplay, Kygo, Zedd and Alan Walker so far.
             <!-- Replace with your own line if you'd rather. -->
           </p>
         </div>
