@@ -384,7 +384,10 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
 /* the crop is baked into the files, so framing no longer depends on viewport width */
 .fac-photo img{width:100%;height:auto;display:block;transition:transform .5s var(--ease)}
 .fac-photo:hover img{transform:scale(1.035)}
-.fac-photo.shot-rasa{max-width:440px}
+/* telescope and one of its frames side by side; 4:3 and ~1:1 columns give equal heights */
+.fac-photos{display:grid;grid-template-columns:4fr 3fr;gap:12px;margin:0 0 18px}
+.fac-photos .fac-photo{margin:0;height:100%}
+.fac-photos .fac-photo img{height:100%;object-fit:cover}
 
 /* ---- project detail modal ---- */
 .card{cursor:pointer}
@@ -488,6 +491,20 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
   .tl-wrap{grid-template-columns:1fr;gap:20px}
   .tl-photo{max-width:230px}
 }
+
+/* small photo inside a timeline entry */
+.tl-inline{display:block;max-width:340px;margin-top:11px;border-radius:9px;overflow:hidden;
+           border:1px solid var(--rule);cursor:zoom-in}
+.tl-inline img{width:100%;display:block;transition:transform .45s var(--ease)}
+.tl-inline:hover img{transform:scale(1.04)}
+.tl-inline-cap{display:block;font-size:12.6px;color:var(--ink-faint);margin-top:6px}
+
+/* badges photo + note at the top of Schools, Workshops & Awards */
+.badges{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;align-items:center;margin:0 0 26px}
+.badges-photo{display:block;border-radius:11px;overflow:hidden;border:1px solid var(--rule);cursor:zoom-in}
+.badges-photo img{width:100%;display:block;transition:transform .5s var(--ease)}
+.badges-photo:hover img{transform:scale(1.03)}
+@media (max-width:760px){ .badges{grid-template-columns:1fr} }
 
 /* ---- timeline ---- */
 .tl{position:relative;margin:28px 0 0;padding-left:26px}
@@ -622,7 +639,7 @@ footer a{color:var(--glow)}
 
 /* ---- small screens ---- */
 @media (max-width:620px){
-  .fac-photo.shot-rasa{max-width:100%}
+  .fac-photos{grid-template-columns:1fr}
   #lightbox{padding:14px}
   #lightbox .cap{font-size:12.5px;padding:0 14px}
   .contact-card{padding:20px 18px}
@@ -775,7 +792,7 @@ nav .wrap{position:relative}
         <a class="zoom" href="assets/about/age-five.jpg" data-cap="Aged five, already holding the books">
           <img src="assets/about/age-five.jpg" alt="YoungPyo Hong aged five, holding a stack of books">
         </a>
-        <figcaption>Where the first line of the timeline comes from.</figcaption>
+        <figcaption>A childhood photo.</figcaption>
       </figure>
     <div class="tl">
       <div class="tl-item">
@@ -808,7 +825,12 @@ nav .wrap{position:relative}
       <div class="tl-item">
         <div class="tl-when">Since 2025</div>
         <div class="tl-what">Integrated MS–PhD at SNU, on <b>gamma-ray burst afterglows</b> with
-          7DT and RASA36.</div>
+          7DT and RASA36.
+          <a class="tl-inline zoom" href="assets/about/kas-talk.jpg"
+             data-cap="Presenting GRB 251013C at the KAS Spring Meeting, April 2026">
+            <img src="assets/about/kas-talk.jpg" alt="Presenting GRB 251013C at the Korean Astronomical Society Spring Meeting, 2026">
+          </a>
+          <span class="tl-inline-cap">Presenting GRB 251013C at the KAS Spring Meeting, 2026.</span></div>
       </div>
     </div>
     </div>
@@ -884,6 +906,37 @@ nav .wrap{position:relative}
       </div>
 
       <div class="card tilt" tabindex="0" role="button">
+        <div class="thumb photo">
+          <img src="assets/followup-system.jpg" alt="Illustration of a wide-field telescope observing under the night sky">
+        </div>
+        <div class="card-body">
+          <h3>Automated ToO Follow-up on RASA36</h3>
+          <p>A fully automated target-of-opportunity system built on TCSpy and gpPy: observing
+             starts within 30 seconds of an alert, and reduction and transient search finish in
+             about 40 minutes. Operational, with a GRB and two Einstein Probe transients already
+             followed up.</p>
+          <div class="foot"><span class="tag live">Operational</span><span class="tag">First author</span></div>
+      <div class="detail" hidden>
+        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
+        <figure class="shot"><img src="assets/facilities/rasa36.jpg" alt="RASA36 at El Sauce Observatory, Chile"><figcaption>RASA36 at El Sauce Observatory, Chile</figcaption></figure>
+        <figure class="shot"><img src="assets/facilities/rasa36-field.jpg" alt="A RASA36 science frame, five 60-second exposures coadded"><figcaption>A RASA36 frame: five 60 s exposures, coadded.</figcaption></figure>
+        <div class="detail-body">
+  <p>GRB afterglows fade fast, and early localizations can be large — so the first minutes
+  matter and a wide field helps. RASA36, with a 2.67° × 2.67° field of view, suits both. I adapted
+  the TCSpy observing system and the gpPy pipeline to it and connected everything in between:
+  parsing GCN notices, selecting observable targets, submitting the request, tiling the error
+  region, reducing the data and searching for transient candidates.</p>
+  <p>Observations start within 30 seconds of an alert, and the whole chain from request to
+  transient search completes in about 40 minutes, with every step reported to Slack so a failure
+  can be caught immediately. Paired with 7DT, a single alert can yield both an early light curve
+  and a medium-band SED. So far it has followed up one GRB and two Einstein Probe transients,
+  each yielding upper limits.</p>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="card tilt" tabindex="0" role="button">
         <div class="thumb">
           <img src="assets/filter-transmittance.png" alt="Measured versus specified transmission curve of a 7DT medium-band filter"></div>
         <div class="card-body">
@@ -901,36 +954,6 @@ nav .wrap{position:relative}
   <p>Central wavelengths and bandwidths agree closely — for the 512 nm filter, a measured FWHM
   of 28.5 nm against a specified 28.3 nm, with both band edges reproduced to within about a
   nanometre. That is the level of agreement the medium-band SED work downstream relies on.</p>
-        </div>
-      </div>
-        </div>
-      </div>
-
-      <div class="card tilt" tabindex="0" role="button">
-        <div class="thumb photo">
-          <img src="assets/followup-system.jpg" alt="Illustration of a wide-field telescope observing under the night sky">
-        </div>
-        <div class="card-body">
-          <h3>Automated ToO Follow-up on RASA36</h3>
-          <p>A fully automated target-of-opportunity system built on TCSpy and gpPy: observing
-             starts within 30 seconds of an alert, and reduction and transient search finish in
-             about 40 minutes. Operational, with a GRB and two Einstein Probe transients already
-             followed up.</p>
-          <div class="foot"><span class="tag live">Operational</span><span class="tag">First author</span></div>
-      <div class="detail" hidden>
-        <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
-        <figure class="shot"><img src="assets/facilities/rasa36.jpg" alt="RASA36 at El Sauce Observatory, Chile"><figcaption>RASA36 at El Sauce Observatory, Chile</figcaption></figure>
-        <div class="detail-body">
-  <p>GRB afterglows fade fast, and early localizations can be large — so the first minutes
-  matter and a wide field helps. RASA36, with a 2.67° × 2.67° field of view, suits both. I adapted
-  the TCSpy observing system and the gpPy pipeline to it and connected everything in between:
-  parsing GCN notices, selecting observable targets, submitting the request, tiling the error
-  region, reducing the data and searching for transient candidates.</p>
-  <p>Observations start within 30 seconds of an alert, and the whole chain from request to
-  transient search completes in about 40 minutes, with every step reported to Slack so a failure
-  can be caught immediately. Paired with 7DT, a single alert can yield both an early light curve
-  and a medium-band SED. So far it has followed up one GRB and two Einstein Probe transients,
-  each yielding upper limits.</p>
         </div>
       </div>
         </div>
@@ -961,7 +984,6 @@ nav .wrap{position:relative}
       </div>
         </div>
       </div>
-
 
       <div class="card tilt" tabindex="0" role="button">
         <div class="thumb photo">
@@ -996,26 +1018,28 @@ nav .wrap{position:relative}
 
       <div class="card tilt" tabindex="0" role="button">
         <div class="thumb photo">
-          <img src="assets/ao-prototype.jpg" alt="Scale opto-mechanical mockup of the adaptive optics bench"></div>
+          <img src="assets/projects/ao-spacebeam.jpg" alt="The near-infrared adaptive optics bench, as shown by Spacebeam"></div>
         <div class="card-body">
           <h3>Near-Infrared Adaptive Optics Design</h3>
           <p>A graduate-course team project to design a near-infrared adaptive optics system:
              Zemax optical design, CAD drawings and a technical manual. The design was delivered to
-             the optical communications company Spacebeam.</p>
-          <div class="foot"><span class="tag">Team project</span><span class="tag pub">Delivered</span></div>
+             the optical communications company <a href="https://spacebeam.co.kr/" target="_blank" rel="noopener">Spacebeam</a>.</p>
+          <div class="foot"><span class="tag">Team project</span><span class="tag pub">Delivered</span><a class="tag link" href="https://spacebeam.co.kr/tech-ao" target="_blank" rel="noopener">Spacebeam&nbsp;↗</a></div>
       <div class="detail" hidden>
         <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
-        <figure class="shot"><img src="assets/ao-prototype.jpg" alt="Scale opto-mechanical mockup of the adaptive optics bench"><figcaption>Scale opto-mechanical mockup of the adaptive optics bench</figcaption></figure>
+        <figure class="shot"><img src="assets/projects/ao-spacebeam.jpg" alt="The adaptive optics bench, as shown by Spacebeam"><figcaption>The adaptive optics bench as it appears on Spacebeam's adaptive optics page (image: Spacebeam).</figcaption></figure>
+        <figure class="shot"><img src="assets/ao-prototype.jpg" alt="Scale opto-mechanical mockup of the adaptive optics bench"><figcaption>Our 3D-printed scale mock-up of the same bench layout.</figcaption></figure>
         <div class="detail-body">
   <p>A graduate-course team project to design a near-infrared adaptive optics system. We
   produced the optical design in Zemax, the opto-mechanical CAD drawings, and a technical
-  manual, and delivered the design to Spacebeam, an optical communications company.</p>
-  <p>The photograph shows a scale mock-up of the bench layout.</p>
+  manual, and delivered the design to <a href="https://spacebeam.co.kr/" target="_blank" rel="noopener">Spacebeam</a>, a company building optical ground stations
+  for satellite laser communication.</p>
+  <p>The first image is the bench as Spacebeam presents it; the second is our 3D-printed scale
+  mock-up of the same layout.</p>
         </div>
       </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -1059,9 +1083,14 @@ nav .wrap{position:relative}
     </div>
 
     <div class="fac">
-      <a class="fac-photo zoom shot-rasa" href="assets/facilities/rasa36.jpg" data-cap="RASA36 at El Sauce Observatory, Chile">
-        <img src="assets/facilities/rasa36.jpg" alt="The RASA36 Schmidt camera at El Sauce Observatory, Chile">
-      </a>
+      <div class="fac-photos">
+        <a class="fac-photo zoom shot-rasa" href="assets/facilities/rasa36.jpg" data-cap="RASA36 at El Sauce Observatory, Chile">
+          <img src="assets/facilities/rasa36.jpg" alt="The RASA36 Schmidt camera at El Sauce Observatory, Chile">
+        </a>
+        <a class="fac-photo zoom" href="assets/facilities/rasa36-field.jpg" data-cap="A RASA36 frame: five 60 s exposures, coadded">
+          <img src="assets/facilities/rasa36-field.jpg" alt="A RASA36 science frame, five 60-second exposures coadded">
+        </a>
+      </div>
       <div class="fac-top">
         <h3>RASA36</h3>
         <span class="where">Observatorio El Sauce, Chile</span>
@@ -1261,6 +1290,18 @@ nav .wrap{position:relative}
   <section id="training" class="rv" data-tab="background">
     <div class="h"><span class="k">Beyond coursework</span><h2>Schools, Workshops &amp; Awards</h2></div>
 
+    <div class="badges">
+      <a class="badges-photo zoom" href="assets/personal/badges.jpg"
+         data-cap="Name badges from schools, workshops and meetings, 2017 – 2026">
+        <img src="assets/personal/badges.jpg" alt="Name badges collected from astronomy schools, workshops and meetings">
+      </a>
+      <p class="prose">
+        Every badge here is a school, workshop or meeting I have attended — from an Astronomy
+        Olympiad weekend in high school to this year's conferences. They gave me much of what I know
+        outside my own projects, and introduced me to people I still trade ideas with.
+      </p>
+    </div>
+
     <div class="acc">
       <button class="acc-btn" type="button" aria-expanded="false">
         <span class="nm">Summer &amp; Winter Schools</span>
@@ -1415,8 +1456,8 @@ nav .wrap{position:relative}
 
       <div class="alt">
         <div class="alt-media grid">
-          <a href="assets/personal/games-01.jpg" data-cap="StarCraft" target="_blank" rel="noopener">
-            <img src="assets/personal/games-01.jpg" alt="StarCraft"><span class="cap">StarCraft</span>
+          <a href="assets/personal/games-01.jpg" data-cap="StarCraft II" target="_blank" rel="noopener">
+            <img src="assets/personal/games-01.jpg" alt="StarCraft II"><span class="cap">StarCraft II</span>
           </a>
           <a href="assets/personal/games-02.jpg" data-cap="Overwatch" target="_blank" rel="noopener">
             <img src="assets/personal/games-02.jpg" alt="Overwatch"><span class="cap">Overwatch</span>
@@ -1432,9 +1473,9 @@ nav .wrap{position:relative}
           <p class="kicker">Playing</p>
           <h3>Games</h3>
           <p>
-            StarCraft since before I should have been allowed to, and whatever else is in the
-            Steam library when the weather is too bad to point a camera at anything.
-            <!-- Replace with your own line. -->
+            StarCraft II, Overwatch and Diablo are the regulars, with the occasional Steam game
+            in between. StarCraft above all — I have been a devoted fan of the series since I was a
+            child, probably for the same reason I ended up in astronomy: it is set in space.
           </p>
         </div>
       </div>
@@ -1452,11 +1493,17 @@ nav .wrap{position:relative}
           <p class="kicker">Outside the field</p>
           <h3>Society &amp; Leadership</h3>
           <p>
-            I spent a term in the <b>Dosan Academy Aegiaeta Leadership Program</b>, built around
-            Ahn Changho's principle of loving others as you love yourself, and before that at the
-            <b>Youth Politics Academy</b>, learning how political systems and governance actually
-            work.
-            <!-- A line of your own: what drew you to these, or what you took from them. -->
+            In 2024 I joined the sixth cohort of the
+            <a href="https://dosan21.kr/" target="_blank" rel="noopener"><b>Dosan Academy Aegiaeta
+            Leadership Program</b></a> — ten weeks of lectures from leading figures across many
+            fields, built around Ahn Changho's ideals of honesty, integration and service, as one of
+            a few university students in a cohort of working professionals.
+          </p>
+          <p>
+            Earlier, at the
+            <a href="https://blog.naver.com/youth_politics/222630387646" target="_blank" rel="noopener"><b>Youth
+            Politics Academy</b></a>, I studied how political systems and governance work, through
+            lectures and debate across different areas of politics.
           </p>
         </div>
       </div>
