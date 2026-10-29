@@ -489,6 +489,7 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
 .tl-photo img{width:100%;display:block;transition:transform .5s var(--ease)}
 .tl-photo a:hover img{transform:scale(1.04)}
 .tl-photo figcaption{font-size:12.6px;line-height:1.5;color:var(--ink-faint);margin-top:9px}
+@media (max-width:620px){ .badges{padding:28px 14px 24px} }
 @media (max-width:700px){
   .tl-wrap{grid-template-columns:1fr;gap:20px}
   .tl-photos{flex-direction:row;align-items:flex-start;gap:14px}
@@ -497,9 +498,33 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
 
 
 /* badges photo + note at the top of Schools, Workshops & Awards */
-.badges{margin:0 0 26px}
-.badges .prose{margin:14px 0 0}
-.badges-photo{display:block;max-width:760px;border-radius:11px;overflow:hidden;border:1px solid var(--rule);cursor:zoom-in}
+/* a small night-sky showcase: dark panel, faint stars, glowing frame, centred */
+.badges{position:relative;overflow:hidden;margin:0 0 30px;padding:38px 28px 32px;
+        border-radius:18px;text-align:center;border:1px solid #1d2f52;
+        box-shadow:0 22px 50px -26px rgba(7,13,30,.6);
+        background:
+          radial-gradient(1.4px 1.4px at 8% 18%,#fff 50%,transparent 52%),
+          radial-gradient(1px 1px at 22% 72%,#cfe3ff 50%,transparent 52%),
+          radial-gradient(1.2px 1.2px at 37% 9%,#fff 50%,transparent 52%),
+          radial-gradient(1px 1px at 63% 88%,#e6dcff 50%,transparent 52%),
+          radial-gradient(1.5px 1.5px at 81% 14%,#fff 50%,transparent 52%),
+          radial-gradient(1px 1px at 93% 61%,#cfe3ff 50%,transparent 52%),
+          radial-gradient(1.2px 1.2px at 4% 84%,#fff 50%,transparent 52%),
+          radial-gradient(60% 55% at 50% 38%,rgba(124,192,255,.16),transparent 70%),
+          radial-gradient(130% 100% at 50% 0%,var(--night-3) 0%,var(--night-1) 55%,var(--night-0) 100%)}
+.badges-kicker{display:block;font-size:11.5px;font-weight:700;letter-spacing:2.4px;
+               text-transform:uppercase;color:var(--glow);margin:0 0 18px}
+.badges-kicker::before,.badges-kicker::after{content:"";display:inline-block;vertical-align:middle;
+               width:34px;height:1px;margin:0 12px;background:linear-gradient(90deg,transparent,var(--glow))}
+.badges-kicker::after{background:linear-gradient(90deg,var(--glow),transparent)}
+.badges p.prose{color:#c9d6ea;margin:20px auto 0;max-width:56ch}
+.badges-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.badges-stats span{font-size:12.5px;letter-spacing:.3px;color:#dbe8ff;padding:6px 13px;border-radius:999px;
+                   border:1px solid rgba(124,192,255,.35);background:rgba(124,192,255,.08)}
+.badges-stats b{color:var(--glow);font-weight:700;margin-right:5px}
+.badges-photo{display:block;max-width:720px;margin:0 auto;border-radius:12px;overflow:hidden;cursor:zoom-in;
+              border:1px solid rgba(124,192,255,.4);
+              box-shadow:0 0 0 6px rgba(124,192,255,.07),0 0 40px -6px rgba(124,192,255,.35),0 20px 40px -18px rgba(0,0,0,.75)}
 .badges-photo img{width:100%;display:block;transition:transform .5s var(--ease)}
 .badges-photo:hover img{transform:scale(1.03)}
 
@@ -1296,6 +1321,7 @@ nav .wrap{position:relative}
     <div class="h"><span class="k">Beyond coursework</span><h2>Schools, Workshops &amp; Awards</h2></div>
 
     <div class="badges">
+      <span class="badges-kicker">Badge collection</span>
       <a class="badges-photo zoom" href="assets/personal/badges.jpg"
          data-cap="Name badges from schools, workshops and meetings">
         <img src="assets/personal/badges.jpg" alt="Name badges collected from astronomy schools, workshops and meetings">
@@ -1304,6 +1330,9 @@ nav .wrap{position:relative}
         Every badge here is a school, workshop or meeting I have attended. They gave me much of what I know
         outside my own projects.
       </p>
+      <div class="badges-stats">
+        <span><b>7</b>schools</span><span><b>7</b>workshop series</span><span><b>5</b>awards &amp; scholarships</span>
+      </div>
     </div>
 
     <div class="acc">
@@ -1459,18 +1488,9 @@ nav .wrap{position:relative}
       </div>
 
       <div class="alt">
-        <div class="alt-media grid">
-          <a href="assets/personal/games-01.jpg" data-cap="StarCraft II" target="_blank" rel="noopener">
-            <img src="assets/personal/games-01.jpg" alt="StarCraft II"><span class="cap">StarCraft II</span>
-          </a>
-          <a href="assets/personal/games-02.jpg" data-cap="Overwatch" target="_blank" rel="noopener">
-            <img src="assets/personal/games-02.jpg" alt="Overwatch"><span class="cap">Overwatch</span>
-          </a>
-          <a href="assets/personal/games-03.jpg" data-cap="Diablo" target="_blank" rel="noopener">
-            <img src="assets/personal/games-03.jpg" alt="Diablo"><span class="cap">Diablo</span>
-          </a>
-          <a href="assets/personal/games-04.jpg" data-cap="Steam" target="_blank" rel="noopener">
-            <img src="assets/personal/games-04.jpg" alt="Steam"><span class="cap">Steam</span>
+        <div class="alt-media">
+          <a href="assets/personal/games-starcraft.jpg" data-cap="StarCraft: Remastered and the collector's editions of all three StarCraft II chapters" target="_blank" rel="noopener">
+            <img src="assets/personal/games-starcraft.jpg" alt="StarCraft: Remastered and the collector's editions of all three StarCraft II chapters"><span class="cap">StarCraft: Remastered and the collector's editions of all three StarCraft II chapters</span>
           </a>
         </div>
         <div class="alt-body">
