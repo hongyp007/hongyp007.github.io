@@ -479,8 +479,18 @@ a.tag.link-tag:hover{background:#136c3d;border-color:#136c3d;color:#fff;text-dec
 @media (max-width:820px){ .contact-grid{grid-template-columns:1fr} }
 
 /* ---- timeline photo inset ---- */
-.tl-wrap{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start;margin-top:28px}
+.tl-wrap{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:start;margin-top:28px}
 .tl-wrap .tl{margin-top:4px}
+/* "What I'm Working On": text with a talk photo beside it */
+.dir-wrap{display:grid;grid-template-columns:1fr 290px;gap:30px;align-items:start}
+.dir-text p.prose:last-child{margin-bottom:0}
+.dir-photo{margin:4px 0 0}
+.dir-photo a{display:block;border-radius:10px;overflow:hidden;border:1px solid var(--rule);cursor:zoom-in}
+.dir-photo img{width:100%;display:block;transition:transform .5s var(--ease)}
+.dir-photo a:hover img{transform:scale(1.04)}
+.dir-photo figcaption{font-size:12.6px;line-height:1.5;color:var(--ink-faint);margin-top:9px}
+@media (max-width:820px){ .dir-wrap{grid-template-columns:1fr;gap:20px} .dir-photo{max-width:480px} }
+
 /* left column: childhood photo at the top, latest photo at the bottom beside "Since 2025" */
 .tl-photos{display:flex;flex-direction:column;justify-content:space-between;gap:26px;align-self:stretch}
 .tl-photo{margin:0}
@@ -795,10 +805,10 @@ nav .wrap{position:relative}
           <figcaption>A childhood photo.</figcaption>
         </figure>
         <figure class="tl-photo">
-          <a class="zoom" href="assets/about/kas-talk.jpg" data-cap="Presenting GRB 251013C at the KAS Spring Meeting, April 2026">
-            <img src="assets/about/kas-talk.jpg" alt="Presenting GRB 251013C at the Korean Astronomical Society Spring Meeting, 2026">
+          <a class="zoom" href="assets/about/woojeon-2026.jpg" data-cap="SNU ARC 5th H.S. Yun (Woojeon) Astronomy Workshop, SNU Pyeongchang Campus, August 2026">
+            <img src="assets/about/woojeon-2026.jpg" alt="Group photo of the SNU ARC 5th H.S. Yun (Woojeon) Astronomy Workshop, August 2026">
           </a>
-          <figcaption>Presenting GRB 251013C at the KAS Spring Meeting, 2026.</figcaption>
+          <figcaption>The SNU astronomy group at the 5th Woojeon Workshop, Pyeongchang, 2026.</figcaption>
         </figure>
       </div>
     <div class="tl">
@@ -848,6 +858,8 @@ nav .wrap{position:relative}
   <section id="direction" class="rv" data-tab="about">
     <div class="h"><span class="k">Right now</span><h2>What I'm Working On</h2></div>
 
+    <div class="dir-wrap">
+      <div class="dir-text">
     <p class="prose">
       My main thread is the afterglow of <strong>GRB 251013C</strong>. 7DT caught it about six
       hours after the burst and recorded a medium-band optical SED during an unusual
@@ -868,6 +880,14 @@ nav .wrap{position:relative}
       that produced it are different problems. The second needs more theory and sharper
       quantitative tools than I have yet — which is what I want a PhD to build.
     </p>
+      </div>
+      <figure class="dir-photo">
+        <a class="zoom" href="assets/about/kas-fall-2026.jpg" data-cap="Presenting the automated follow-up system at the KAS Fall Meeting, Gwacheon, October 2026">
+          <img src="assets/about/kas-fall-2026.jpg" alt="YoungPyo Hong presenting the automated wide-field rapid follow-up system at the 2026 KAS Fall Meeting">
+        </a>
+        <figcaption>Presenting the automated follow-up system at the KAS Fall Meeting, October 2026.</figcaption>
+      </figure>
+    </div>
   </section>
 
 
