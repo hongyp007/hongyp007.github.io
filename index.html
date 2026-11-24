@@ -1081,7 +1081,9 @@ nav .wrap{position:relative}
              counterparts and GRB afterglows, built on the group's TCSpy and gpPy: observing starts within 30 seconds of an alert, and reduction
              and transient search finish in about 40 minutes. Operational, with a GRB and two Einstein Probe transients already
              followed up.</p>
-          <div class="foot"><span class="tag live">Operational</span><span class="tag">First author</span></div>
+          <div class="foot"><span class="tag live">Operational</span><span class="tag">First author</span>
+            <a class="tag link" href="https://github.com/7DimensionalTelescope/tcspy_RASA36" target="_blank" rel="noopener">TCSpy (RASA36)&nbsp;↗</a>
+            <a class="tag link" href="https://github.com/7DimensionalTelescope/gpPy_RASA36" target="_blank" rel="noopener">gpPy (RASA36)&nbsp;↗</a></div>
       <div class="detail" hidden>
         <!-- Add more <figure class="shot"> blocks here as you supply photos. -->
         <figure class="shot"><img src="assets/projects/rasa36-flow.svg" alt="Flow chart of the automated ToO system: alert handling, robotic observation with TCSpy, and reduction and transient search with gpPy"><figcaption>How the system runs, from an alert to transient candidates.</figcaption></figure>
@@ -1092,8 +1094,8 @@ nav .wrap{position:relative}
   within hours, alert localizations can span tens to hundreds of square degrees, and alerts
   arrive at any time. Following them up needs a system that is rapid, wide-field and automated,
   and RASA36's 2.67° × 2.67° field suits it.</p>
-  <p>The system joins existing tools from our group: the robotic control software TCSpy, written
-  by Hyeonho Choi for the 7DT array; the reduction and transient-search pipeline gpPy, by
+  <p>The system joins existing tools from our group: the robotic control software <a href="https://github.com/7DimensionalTelescope/tcspy" target="_blank" rel="noopener">TCSpy</a>, written
+  by Hyeonho Choi for the 7DT array; the reduction and transient-search pipeline <a href="https://github.com/7DimensionalTelescope/gppy" target="_blank" rel="noopener">gpPy</a>, by
   Gregory S. H. Paek and Sophia Kim; and GeckoDigestor, by Gregory S. H. Paek, which turns LVK
   alerts into tile-by-tile observing plans. I integrated them into one automated workflow. The
   request side parses GCN notices, selects observable targets and sends ToO requests to both
@@ -1105,7 +1107,9 @@ nav .wrap{position:relative}
   pipeline to TCSpy's data flow so that each completed transfer from Chile (about 30 MB/s)
   starts the reduction automatically, prepared reference images in advance so subtraction can
   begin at once, and optimized and parallelized selected stages to run about 2–4× faster. Both
-  now report their live status to Slack.</p>
+  now report their live status to Slack. The adapted versions are public as
+  <a href="https://github.com/7DimensionalTelescope/tcspy_RASA36" target="_blank" rel="noopener">tcspy_RASA36</a> and
+  <a href="https://github.com/7DimensionalTelescope/gpPy_RASA36" target="_blank" rel="noopener">gpPy_RASA36</a>.</p>
   <p>I then reworked the pipeline stage by stage on one night of data (58 tiles), following the
   7DT pipeline where possible. The changes include fixing a dark-frame scaling bug and the camera
   gain, hot-pixel correction, a quality grade for every frame's astrometric solution, zero points
