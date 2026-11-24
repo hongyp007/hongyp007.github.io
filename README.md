@@ -1,6 +1,6 @@
 # hongyp007.github.io
 
-Personal academic website of YoungPyo Hong (M.S. student in astronomy, Seoul National University).
+Personal academic website of YoungPyo Hong (graduate student in astronomy, Seoul National University).
 
 Live at **https://hongyp007.github.io**
 
